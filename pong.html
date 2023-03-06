@@ -25,6 +25,7 @@
 
         //Importing Scenes
         import StartScene from "./Game/StartScene.js"
+        import PlayScene from "./Game/PlayScene.js";
 
         Input.attach(document);
         let { canvas, ctx } = getCanvas();
@@ -33,7 +34,9 @@
         //Adding scenes to the scenes array
         let startScene = new StartScene();
         Game.scenes.push(startScene);
-        Game.changeScene(0)
+        let playScene = new PlayScene();
+        Game.scenes.push(playScene);
+        Game.changeScene(0);
         
         //Useful stuff
         //Game.scenes.push(scene);
@@ -45,7 +48,7 @@
         {
             Game.updateScene();
             Input.update();
-            Game.scene().update(ctx);
+            Game.scene().update();
             Game.scene().draw(ctx);
             Game.scene().remove();
             Time.timePassed += Time.secondsBetweenFrame;

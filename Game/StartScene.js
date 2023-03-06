@@ -3,12 +3,13 @@
 
 import Scene from "../engine/Scene.js"
 import StartGameObject from "./StartSceneText-GameObject.js";
+import ControllerGameObject from "./ControllerGameObject.js";
 
 class StartScene extends Scene
 {
   constructor()
   {
-    super("Main Pong Scene");
+    super("Start Scene");
   }
 
   start()
@@ -16,6 +17,7 @@ class StartScene extends Scene
     const canvas = document.querySelector('canvas');
     this.gameObjects.push(new StartGameObject(canvas.width / 2 - 250, canvas.height / 2));
 
+    this.gameObjects.push(new ControllerGameObject());
   }
 }
 
