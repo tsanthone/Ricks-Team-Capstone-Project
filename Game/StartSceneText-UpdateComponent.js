@@ -1,5 +1,5 @@
-import Component from "../engine/Component.js"
-import Time from "../engine/Time.js"
+import Component from "../Engine/Component.js"
+import Time from "../Engine/Time.js"
 
 
 class StartUpdateComponent extends Component {

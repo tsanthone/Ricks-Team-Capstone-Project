@@ -1,9 +1,9 @@
 import GameObject from "../Engine/GameObject.js"
 import Text from "../Engine/Text.js"
-import TextDraw from "../engine/TextDraw.js"
-import StartUpdateComponent from "./StartSceneText-UpdateComponent.js"
+import TextDraw from "../Engine/TextDraw.js"
+import StartUpdateComponent from "./StartSceneTitle-UpdateComponent.js"
 
-class StartGameObject extends GameObject
+class StartSceneTitleGameObject extends GameObject
 {
   constructor(x,y)
   {
@@ -14,10 +14,10 @@ class StartGameObject extends GameObject
   }
   start()
   {
-    this.components.push(new Text(this, this.x,this.y,"Time", "50px sans"))
+    this.components.push(new Text(this, this.x,this.y,"PONG", "500px sans"))
     this.components.push(new TextDraw(this, "white", "white"))
     this.components.push(new StartUpdateComponent(this))
   }
 }
 
-export default StartGameObject;
+export default StartSceneTitleGameObject;
