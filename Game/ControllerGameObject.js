@@ -2,11 +2,9 @@
 
 import GameObject from "../Engine/GameObject.js";
 import ControllerUpdateComponent from "./ControllerUpdateComponent.js";
-import Circle from "../Engine/Circle.js";
-import CircleDraw from "../Engine/CircleDraw.js";
 
 class ControllerGameObject extends GameObject{
-    constructor(x, y){
+    constructor(){
         super();
         this.components.push(new ControllerUpdateComponent(this));
     }

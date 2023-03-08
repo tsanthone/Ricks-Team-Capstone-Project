@@ -2,11 +2,11 @@
 
 import Scene from "../Engine/Scene.js";
 import MidFieldBarGameObject from "./MidFieldBarGameObject.js";
-// import BallGameObject from "./BallGameObject.jsf";
+import BallGameObject from "./BallGameObject.js";
+import Constants from "./Constants.js";
 // import UserPaddleGameObject from "./UserPaddleGameObject.js";
 // import AIPaddleGameObject from "./AIPaddleGameObject.js";
 // import ScoreGameObject from "./ScoreGameObject.js";
-import Constants from "./Constants.js";
 
 class PlayScene extends Scene{
     constructor(){
@@ -15,7 +15,10 @@ class PlayScene extends Scene{
 
     start(){
         // Add Mid-Field Bar
-        this.gameObjects.push(new MidFieldBarGameObject((Constants.maxX / 2) - (Constants.midFieldBarHeight / 2), 0));
+        this.gameObjects.push(new MidFieldBarGameObject());
+
+        // Add PONG Ball
+        this.gameObjects.push(new BallGameObject(Constants.maxX / 2, Constants.maxY / 2));
     }
 }
 
