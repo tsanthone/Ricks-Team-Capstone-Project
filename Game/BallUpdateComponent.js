@@ -25,10 +25,10 @@ class BallUpdateComponent extends Component{
         proposedY += this.yVel * Time.secondsBetweenFrame;
 
         // Paddle Collisions
-        if(proposedX < userPaddle.x + userPaddle.w + ball.r){
+        if(proposedX < userPaddle.x + userPaddle.w + ball.r && (proposedY > userPaddle.y && proposedY < userPaddle.y + userPaddle.h)){
             canMoveX = false;
         }
-        if(proposedX > aiPaddle.x - ball.r){
+        if(proposedX > aiPaddle.x - ball.r && (proposedY > aiPaddle.y && proposedY < aiPaddle.y + aiPaddle.h)){
             canMoveX = false;
         }
 
