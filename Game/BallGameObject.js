@@ -8,7 +8,7 @@ import BallUpdateComponent from "./BallUpdateComponent.js";
 class BallGameObject extends GameObject{
     constructor(x, y){
         super();
-        this.r = 35;
+        this.r = 25;
         this.components.push(new Circle(this, x, y, this.r));
         this.components.push(new CircleDraw(this, "white", "black"));
         this.components.push(new BallUpdateComponent(this));

@@ -7,8 +7,8 @@ import Constants from "./Constants.js";
 class BallUpdateComponent extends Component{
     constructor(parent){
         super(parent);
-        this.xVel = 200;
-        this.yVel = 200;
+        this.xVel = 300;
+        this.yVel = 300;
     }
 
     update(){
