@@ -2,6 +2,8 @@ class Game{
     static scenes = [];
     static currentSceneIndex = 0;
     static nextSceneIndex = -1;
+    static userScore = 0;
+    static aiScore = 0;
 
     static scene(){
         return Game.scenes[Game.currentSceneIndex];

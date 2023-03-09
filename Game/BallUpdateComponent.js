@@ -9,7 +9,7 @@ class BallUpdateComponent extends Component{
     constructor(parent){
         super(parent);
         this.xVel = (300 + Math.random() * 100) * (-1 + Math.round(Math.random()) * 2);
-        this.yVel = (300 + Math.random() * 100) * (-1 + Math.round(Math.random()) * 2);
+        this.yVel = (310 + Math.random() * 100) * (-1 + Math.round(Math.random()) * 2);
     }
 
     update(){
@@ -37,7 +37,18 @@ class BallUpdateComponent extends Component{
             ball.x = proposedX;
         }
         else{
-            this.xVel *= -1;
+            if(proposedX > 0 + ball.r && proposedX < Constants.maxX - ball.r){
+                this.xVel *= -1;
+            }
+            else if(proposedX < 0 + ball.r){
+                Game.aiScore++;
+                Game.scene().restart();
+            }
+            else if(proposedX > Constants.maxX - ball.r){
+                Game.userScore++;
+                Game.scene().restart();
+            }
+            
         }
         if(proposedY > 0 + ball.r && proposedY < Constants.maxY - ball.r && canMoveY){
             ball.y = proposedY;
