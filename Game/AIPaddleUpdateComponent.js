@@ -8,7 +8,7 @@ import Game from "../Engine/Game.js";
 class AIPaddleUpdateComponent extends Component{
     constructor(parent){
         super(parent);
-        this.vel = 300;
+        this.vel = 250;
     }
 
     update(){
