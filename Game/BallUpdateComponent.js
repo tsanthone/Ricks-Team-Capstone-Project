@@ -8,6 +8,7 @@ import Game from "../Engine/Game.js";
 class BallUpdateComponent extends Component{
     constructor(parent){
         super(parent);
+        // Pseudo randomizes the x and y velocities of the ball as it is being created.
         this.xVel = (300 + Math.random() * 100) * (-1 + Math.round(Math.random()) * 2);
         this.yVel = (310 + Math.random() * 100) * (-1 + Math.round(Math.random()) * 2);
     }

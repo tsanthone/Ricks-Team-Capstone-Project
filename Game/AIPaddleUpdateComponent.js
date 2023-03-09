@@ -16,6 +16,7 @@ class AIPaddleUpdateComponent extends Component{
         let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
         let proposedY = paddle.y;
 
+        // The "AI" that controls the paddle. If the ball is lower than the paddle then go down, if it is above then it go up.
         if((paddle.y + (paddle.h / 2)) > ball.y){
             proposedY -= this.vel * Time.secondsBetweenFrame;
         }
@@ -23,6 +24,7 @@ class AIPaddleUpdateComponent extends Component{
             proposedY += this.vel * Time.secondsBetweenFrame;
         }
 
+        // Prevents the paddle from going off the screen.
         if(proposedY > 0 && proposedY < Constants.maxY - paddle.h){
             paddle.y = proposedY;
         }

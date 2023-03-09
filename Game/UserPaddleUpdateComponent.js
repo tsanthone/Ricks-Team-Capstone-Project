@@ -15,6 +15,7 @@ class UserPaddleUpdateComponent extends Component{
         let paddle = this.parent.getComponent("Rectangle");
         let proposedY = paddle.y;
 
+        // If the user presses the w key then move up, if they press s move down.
         if(Input.keys["w"] == true){
             proposedY -= this.vel * Time.secondsBetweenFrame;
         }
@@ -22,6 +23,7 @@ class UserPaddleUpdateComponent extends Component{
             proposedY += this.vel * Time.secondsBetweenFrame;
         }
 
+        // Prevents the user paddle from leaving the screen.
         if(proposedY > 0 && proposedY < Constants.maxY - paddle.h){
             paddle.y = proposedY;
         }
