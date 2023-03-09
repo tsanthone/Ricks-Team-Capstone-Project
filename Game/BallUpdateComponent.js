@@ -8,8 +8,8 @@ import Game from "../Engine/Game.js";
 class BallUpdateComponent extends Component{
     constructor(parent){
         super(parent);
-        this.xVel = 350;
-        this.yVel = 300;
+        this.xVel = (300 + Math.random() * 100) * (-1 + Math.round(Math.random()) * 2);
+        this.yVel = (300 + Math.random() * 100) * (-1 + Math.round(Math.random()) * 2);
     }
 
     update(){

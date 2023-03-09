@@ -8,15 +8,13 @@ import Game from "../Engine/Game.js";
 class AIPaddleUpdateComponent extends Component{
     constructor(parent){
         super(parent);
-        this.vel = 250;
+        this.vel = 300;
     }
 
     update(){
         let paddle = this.parent.getComponent("Rectangle");
         let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
         let proposedY = paddle.y;
-
-        console.log(ball.y);
 
         if((paddle.y + (paddle.h / 2)) > ball.y){
             proposedY -= this.vel * Time.secondsBetweenFrame;

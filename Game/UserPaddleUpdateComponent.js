@@ -8,7 +8,7 @@ import Constants from "./Constants.js";
 class UserPaddleUpdateComponent extends Component{
     constructor(parent){
         super(parent);
-        this.vel = 250;
+        this.vel = 300;
     }
 
     update(){

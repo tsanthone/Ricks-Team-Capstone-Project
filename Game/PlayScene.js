@@ -15,7 +15,12 @@ class PlayScene extends Scene{
 
     start(){
         // Add Mid-Field Bar
-        this.gameObjects.push(new MidFieldBarGameObject());
+        let totalBars = 12;
+        let midBarY = 20;
+        for(let i = 0; i < totalBars; i++){
+            this.gameObjects.push(new MidFieldBarGameObject(midBarY));
+            midBarY += 80; // Adds 2X the height of a mid field bar dash to the Y so that the next one is spread down.
+        }
 
         // Add PONG Ball
         this.gameObjects.push(new BallGameObject(Constants.maxX / 2, Constants.maxY / 2));
