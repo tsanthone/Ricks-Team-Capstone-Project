@@ -1,7 +1,7 @@
 import GameObject from "../Engine/GameObject.js"
 import Circle from "../Engine/Circle.js";
 import CircleDraw from "../Engine/CircleDraw.js";
-import StartSceneDotUpdateComponent from "./StartSceneDot-UpdateComponent.js";
+import StartSceneDotUpdateComponent from "./Dot-UpdateComponent.js";
 
 class StartSceneDotGameObject extends GameObject{
   constructor(x,y,r, color){

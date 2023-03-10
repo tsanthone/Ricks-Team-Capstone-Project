@@ -26,6 +26,7 @@
         //Importing Scenes
         import StartScene from "./Game/StartScene.js"
         import PlayScene from "./Game/PlayScene.js";
+        import EndScene from "./Game/EndScene.js";
 
         Input.attach(document);
         let { canvas, ctx } = getCanvas();
@@ -36,6 +37,10 @@
         Game.scenes.push(startScene);
         let playScene = new PlayScene();
         Game.scenes.push(playScene);
+        
+        let endScene = new EndScene();
+        Game.scenes.push(endScene);
+        
         Game.changeScene(0);
         
         //Useful stuff

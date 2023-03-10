@@ -7,6 +7,7 @@ import Constants from "./Constants.js";
 import UserPaddleGameObject from "./UserPaddleGameObject.js";
 import AIPaddleGameObject from "./AIPaddleGameObject.js";
 import ScoreGameObject from "./ScoreGameObject.js";
+import ControllerGameObject from "./ControllerGameObject.js";
 
 class PlayScene extends Scene{
     constructor(){
@@ -33,6 +34,13 @@ class PlayScene extends Scene{
 
         // Add AI Controlled Paddle
         this.gameObjects.push(new AIPaddleGameObject(Constants.maxX - 80, Constants.maxY - 215));
+
+
+        
+
+        //////////////////    FOR TESTING     ////////////////////////
+        this.gameObjects.push(new ControllerGameObject());
+
     }
 }
 

@@ -11,7 +11,10 @@ class PressStartGameObject extends GameObject{
     this.start();
   }
   start(){
-    this.components.push(new Text(this, this.x,this.y,"Press ENTER to Start!", "50px sans"))
+    const canvas = document.querySelector('canvas');
+    let font = (canvas.height / 20) + "px sans"
+
+    this.components.push(new Text(this, this.x,this.y,"Press ENTER to Start!", font))
     this.components.push(new TextDraw(this, "white", "white"))
     this.components.push(new PressToStartUpdateComponent(this))
   }

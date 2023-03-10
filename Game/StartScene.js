@@ -5,7 +5,7 @@ import Scene from "../Engine/Scene.js"
 import StartGameObject from "./StartSceneText-GameObject.js";
 import ControllerGameObject from "./ControllerGameObject.js";
 import PressStartGameObject from "./PressToStartGameObject.js";
-import StartSceneDotGameObject from "./StartSceneDot-GameObject.js";
+import DotGameObject from "./Dot-GameObject.js";
 import StartSceneTitleGameObject from "./StartSceneTitle-GameObject.js";
 
 class StartScene extends Scene
@@ -26,18 +26,18 @@ class StartScene extends Scene
     //Background  
     for (var i = 0; i < 80; i++) {
       const color = `hsl(${Math.random() * 360}, 70%, 100%, 30%)`;
-      this.gameObjects.push(new StartSceneDotGameObject(Math.random() * canvas.width, Math.random() * canvas.height, Math.random() * 10, color));
+      this.gameObjects.push(new DotGameObject(Math.random() * canvas.width, Math.random() * canvas.height, Math.random() * 10, color));
     }
     for (var i = 0; i < 20; i++) {
       const color = `hsl(${Math.random() * 360}, 70%, 100%, 50%)`;
-      this.gameObjects.push(new StartSceneDotGameObject(Math.random() * canvas.width, Math.random() * canvas.height, Math.random() * 200, color));
+      this.gameObjects.push(new DotGameObject(Math.random() * canvas.width, Math.random() * canvas.height, Math.random() * 200, color));
     }
 
     //Title
-    this.gameObjects.push(new StartSceneTitleGameObject(canvas.width / 2 - 700, canvas.height / 2 - 100));
+    this.gameObjects.push(new StartSceneTitleGameObject(canvas.width / 2 - (canvas.width / 3), canvas.height / 2 - (canvas.width / 20)));
 
     //Press SPACE To Start
-    this.gameObjects.push(new PressStartGameObject(canvas.width / 2 - 250, canvas.height / 2 + 200));
+    this.gameObjects.push(new PressStartGameObject(canvas.width / 2 - (canvas.width / 9), canvas.height / 2 + (canvas.width / 20)));
 
     //Controller
     this.gameObjects.push(new ControllerGameObject());
