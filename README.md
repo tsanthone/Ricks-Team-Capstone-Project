@@ -6,3 +6,5 @@ This will be done using a simple game of PONG. In order to use this, you must ru
 
 Release Notes:
 Milestone 1 - Initial creation of the engine and some basic game objects.
+
+Milestone 2 - Full creation of the base PONG game, complete with start screen, play screen, and end screen.
