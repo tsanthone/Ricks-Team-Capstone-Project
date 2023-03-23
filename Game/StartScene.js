@@ -7,6 +7,10 @@ import ControllerGameObject from "./ControllerGameObject.js";
 import PressStartGameObject from "./PressToStartGameObject.js";
 import DotGameObject from "./Dot-GameObject.js";
 import StartSceneTitleGameObject from "./StartSceneTitle-GameObject.js";
+import LensesToggle from "./LensesToggle.js";
+import SceneLensGameObject from "./SceneLens-GameObject.js";
+import TimeLensGameObject from "./TimeLens-GameObject.js";
+import InputLensGameObject from "./InputLens-GameObject.js";
 
 class StartScene extends Scene
 {
@@ -18,10 +22,6 @@ class StartScene extends Scene
   start()
   {
     const canvas = document.querySelector('canvas');
-
-    //Time
-    //this.gameObjects.push(new StartGameObject(canvas.width / 2 - 250, canvas.height / 2));
-
 
     //Background  
     for (var i = 0; i < 80; i++) {
@@ -41,6 +41,21 @@ class StartScene extends Scene
 
     //Controller
     this.gameObjects.push(new ControllerGameObject());
+
+
+    //Lenses
+    if(LensesToggle.sceneLensToggle == true)
+    {
+        this.gameObjects.push(new SceneLensGameObject(canvas.width / 10, canvas.height * 9/10));
+    }
+    if(LensesToggle.timeLensToggle == true)
+    {
+        this.gameObjects.push(new TimeLensGameObject(canvas.width / 4, canvas.height * 9/10));
+    }
+    if(LensesToggle.inputLensToggle == true)
+    {
+        this.gameObjects.push(new InputLensGameObject(canvas.width / 2, canvas.height * 9/10));
+    }
   }
 }
 

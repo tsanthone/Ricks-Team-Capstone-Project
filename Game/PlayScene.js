@@ -8,17 +8,21 @@ import UserPaddleGameObject from "./UserPaddleGameObject.js";
 import AIPaddleGameObject from "./AIPaddleGameObject.js";
 import ScoreGameObject from "./ScoreGameObject.js";
 import ControllerGameObject from "./ControllerGameObject.js";
+import LensesToggle from "./LensesToggle.js";
+import SceneLensGameObject from "./SceneLens-GameObject.js";
+import TimeLensGameObject from "./TimeLens-GameObject.js";
+import InputLensGameObject from "./InputLens-GameObject.js";
 
-class PlayScene extends Scene{
-    constructor(){
+class PlayScene extends Scene {
+    constructor() {
         super("Play Scene");
     }
 
-    start(){
+    start() {
         // Add Mid-Field Bar
         let totalBars = 12;
         let midBarY = 20;
-        for(let i = 0; i < totalBars; i++){
+        for (let i = 0; i < totalBars; i++) {
             this.gameObjects.push(new MidFieldBarGameObject(midBarY));
             midBarY += 80; // Adds 2X the height of a mid field bar dash to the Y so that the next one is spread down.
         }
@@ -36,10 +40,28 @@ class PlayScene extends Scene{
         this.gameObjects.push(new AIPaddleGameObject(Constants.maxX - 80, Constants.maxY - 215));
 
 
-        
+
 
         //////////////////    FOR TESTING     ////////////////////////
         this.gameObjects.push(new ControllerGameObject());
+
+
+
+        //Lenses
+        const canvas = document.querySelector('canvas');
+
+        if(LensesToggle.sceneLensToggle == true)
+        {
+            this.gameObjects.push(new SceneLensGameObject(canvas.width / 10, canvas.height * 9/10));
+        }
+        if(LensesToggle.timeLensToggle == true)
+        {
+            this.gameObjects.push(new TimeLensGameObject(canvas.width / 4, canvas.height * 9/10));
+        }
+        if(LensesToggle.inputLensToggle == true)
+        {
+            this.gameObjects.push(new InputLensGameObject(canvas.width / 2, canvas.height * 9/10));
+        }
 
     }
 }
