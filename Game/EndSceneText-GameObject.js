@@ -16,7 +16,7 @@ class EndSceneTextGameObject extends GameObject
     const canvas = document.querySelector('canvas');
     let font = (canvas.height / 25) + "px sans"
 
-    this.components.push(new Text(this, this.x,this.y,"Press ENTER to Retry               Press Escape to Main Menu", font))
+    this.components.push(new Text(this, this.x,this.y,"Press ENTER to Play Again          Press Escape to Main Menu", font))
     this.components.push(new TextDraw(this, "white", "white"))
   }
 }

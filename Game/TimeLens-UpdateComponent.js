@@ -13,8 +13,8 @@ class TimeLensUpdateComponent extends Component {
     this.time += Time.secondsBetweenFrame;
     let text = this.parent.getComponent("Text");
   
-    text.text = "DeltaTime: " + Time.millisecondsBetweenFrames/1000 + "              Time: " + Time.timePassed.toFixed(2) +" s"; //Set text to be current time
-  
+    text.text = "                        ΔTime: " + Time.millisecondsBetweenFrames/1000 + "          Time: " + Time.timePassed.toFixed(2) +" s"; //Set text to be current time
+                 //////////////
   }
 }
 

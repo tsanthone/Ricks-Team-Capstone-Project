@@ -26,26 +26,22 @@ class EndScene extends Scene {
 
         //Result
         if (Game.userScore >= 10) {
-            for (var i = 0; i < 80; i++) 
-            {
+            for (var i = 0; i < 80; i++) {
                 const color = `hsl(${Math.random() * 360}, 100%, 60%, 70%)`;
                 this.gameObjects.push(new DotGameObject(Math.random() * canvas.width, Math.random() * canvas.height, Math.random() * 10, color));
             }
-            for (var i = 0; i < 20; i++)
-            {
+            for (var i = 0; i < 20; i++) {
                 const color = `hsl(${Math.random() * 360}, 100%, 60%, 70%)`;
                 this.gameObjects.push(new DotGameObject(Math.random() * canvas.width, Math.random() * canvas.height, Math.random() * 200, color));
             }
             this.gameObjects.push(new EndSceneResultGameObject(canvas.width / 2 - (canvas.width / 3.52), canvas.height / 2 - (canvas.width / 20), "Winner!"));
         }
         else {
-            for (var i = 0; i < 80; i++)
-            {
+            for (var i = 0; i < 80; i++) {
                 const color = `hsl(${Math.random() * 360}, 10%, 20%, 70%)`;
                 this.gameObjects.push(new DotGameObject(Math.random() * canvas.width, Math.random() * canvas.height, Math.random() * 10, color));
             }
-            for (var i = 0; i < 20; i++) 
-            {
+            for (var i = 0; i < 20; i++) {
                 const color = `hsl(${Math.random() * 360}, 10%, 20%, 70%)`;
                 this.gameObjects.push(new DotGameObject(Math.random() * canvas.width, Math.random() * canvas.height, Math.random() * 200, color));
             }
@@ -58,17 +54,14 @@ class EndScene extends Scene {
         this.gameObjects.push(new ControllerGameObject());
 
         //Lenses
-        if(LensesToggle.sceneLensToggle == true)
-        {
-            this.gameObjects.push(new SceneLensGameObject(canvas.width / 10, canvas.height * 9/10));
+        if (LensesToggle.sceneLensToggle == true) {
+            this.gameObjects.push(new SceneLensGameObject(canvas.width / 25, canvas.height * 9 / 10));
         }
-        if(LensesToggle.timeLensToggle == true)
-        {
-            this.gameObjects.push(new TimeLensGameObject(canvas.width / 4, canvas.height * 9/10));
+        if (LensesToggle.timeLensToggle == true) {
+            this.gameObjects.push(new TimeLensGameObject(canvas.width / 25, canvas.height * 9 / 10));
         }
-        if(LensesToggle.inputLensToggle == true)
-        {
-            this.gameObjects.push(new InputLensGameObject(canvas.width / 2, canvas.height * 9/10));
+        if (LensesToggle.inputLensToggle == true) {
+            this.gameObjects.push(new InputLensGameObject(canvas.width / 25, canvas.height * 9 / 10));
         }
     }
 }

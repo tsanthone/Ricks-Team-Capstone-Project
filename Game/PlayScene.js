@@ -50,17 +50,15 @@ class PlayScene extends Scene {
         //Lenses
         const canvas = document.querySelector('canvas');
 
-        if(LensesToggle.sceneLensToggle == true)
-        {
-            this.gameObjects.push(new SceneLensGameObject(canvas.width / 10, canvas.height * 9/10));
+        //Lenses
+        if (LensesToggle.sceneLensToggle == true) {
+            this.gameObjects.push(new SceneLensGameObject(canvas.width / 25, canvas.height * 9 / 10));
         }
-        if(LensesToggle.timeLensToggle == true)
-        {
-            this.gameObjects.push(new TimeLensGameObject(canvas.width / 4, canvas.height * 9/10));
+        if (LensesToggle.timeLensToggle == true) {
+            this.gameObjects.push(new TimeLensGameObject(canvas.width / 25, canvas.height * 9 / 10));
         }
-        if(LensesToggle.inputLensToggle == true)
-        {
-            this.gameObjects.push(new InputLensGameObject(canvas.width / 2, canvas.height * 9/10));
+        if (LensesToggle.inputLensToggle == true) {
+            this.gameObjects.push(new InputLensGameObject(canvas.width / 25, canvas.height * 9 / 10));
         }
 
     }

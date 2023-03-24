@@ -2,7 +2,6 @@
 //have it registered in the html file as a scene and add it into the scenes array.
 
 import Scene from "../Engine/Scene.js"
-import StartGameObject from "./StartSceneText-GameObject.js";
 import ControllerGameObject from "./ControllerGameObject.js";
 import PressStartGameObject from "./PressToStartGameObject.js";
 import DotGameObject from "./Dot-GameObject.js";
@@ -12,15 +11,12 @@ import SceneLensGameObject from "./SceneLens-GameObject.js";
 import TimeLensGameObject from "./TimeLens-GameObject.js";
 import InputLensGameObject from "./InputLens-GameObject.js";
 
-class StartScene extends Scene
-{
-  constructor()
-  {
+class StartScene extends Scene {
+  constructor() {
     super("Start Scene");
   }
 
-  start()
-  {
+  start() {
     const canvas = document.querySelector('canvas');
 
     //Background  
@@ -44,17 +40,14 @@ class StartScene extends Scene
 
 
     //Lenses
-    if(LensesToggle.sceneLensToggle == true)
-    {
-        this.gameObjects.push(new SceneLensGameObject(canvas.width / 10, canvas.height * 9/10));
+    if (LensesToggle.sceneLensToggle == true) {
+      this.gameObjects.push(new SceneLensGameObject(canvas.width / 25, canvas.height * 9 / 10));
     }
-    if(LensesToggle.timeLensToggle == true)
-    {
-        this.gameObjects.push(new TimeLensGameObject(canvas.width / 4, canvas.height * 9/10));
+    if (LensesToggle.timeLensToggle == true) {
+      this.gameObjects.push(new TimeLensGameObject(canvas.width / 25, canvas.height * 9 / 10));
     }
-    if(LensesToggle.inputLensToggle == true)
-    {
-        this.gameObjects.push(new InputLensGameObject(canvas.width / 2, canvas.height * 9/10));
+    if (LensesToggle.inputLensToggle == true) {
+      this.gameObjects.push(new InputLensGameObject(canvas.width / 25, canvas.height * 9 / 10));
     }
   }
 }

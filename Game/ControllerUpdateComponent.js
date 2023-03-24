@@ -68,7 +68,7 @@ class ControllerUpdateComponent extends Component {
         if (Input.frameKeysDown["1"] == true) {
             if (LensesToggle.sceneLensToggle == false) {
                 LensesToggle.sceneLensToggle = true;
-                Game.scene().gameObjects.push(new SceneLensGameObject(canvas.width / 10, canvas.height * 9 / 10));
+                Game.scene().gameObjects.push(new SceneLensGameObject(canvas.width / 25, canvas.height * 9 / 10));
             }
             else if (LensesToggle.sceneLensToggle == true) {
                 LensesToggle.sceneLensToggle = false;
@@ -81,7 +81,7 @@ class ControllerUpdateComponent extends Component {
         if (Input.frameKeysDown["2"] == true) {
             if (LensesToggle.timeLensToggle == false) {
                 LensesToggle.timeLensToggle = true;
-                Game.scene().gameObjects.push(new TimeLensGameObject(canvas.width / 4, canvas.height * 9 / 10));
+                Game.scene().gameObjects.push(new TimeLensGameObject(canvas.width / 25, canvas.height * 9 / 10));
             }
             else if (LensesToggle.timeLensToggle == true) {
                 LensesToggle.timeLensToggle = false;
@@ -94,7 +94,7 @@ class ControllerUpdateComponent extends Component {
         if (Input.frameKeysDown["3"] == true) {
             if (LensesToggle.inputLensToggle == false) {
                 LensesToggle.inputLensToggle = true;
-                Game.scene().gameObjects.push(new InputLensGameObject(canvas.width / 2, canvas.height * 9 / 10));
+                Game.scene().gameObjects.push(new InputLensGameObject(canvas.width / 25, canvas.height * 9 / 10));
             }
             else if (LensesToggle.inputLensToggle == true) {
                 LensesToggle.inputLensToggle = false;
