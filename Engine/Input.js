@@ -85,7 +85,7 @@ class Input {
     //Setup all the key listeners
     document.body.addEventListener('keydown', keydown);
     document.body.addEventListener('keyup', keyup);
-    document.body.addEventListener('keypress', keypress);
+    //document.body.addEventListener('keypress', keypress);
     document.body.addEventListener('mousedown', mousedown);
     document.body.addEventListener('mouseup', mouseup);
     document.body.addEventListener('mousemove', mousemove);
@@ -93,7 +93,41 @@ class Input {
     document.body.addEventListener('contextmenu', contextmenu);
 
     function keydown(event) {
-      // console.log("Down: " + event.key);
+
+      //FOR INPUT LENS
+      let key = event.key;
+      Input.keyHistory.shift()
+      if (key == " ") {
+        key = "Space";
+      }
+      else if(key == "ArrowUp") {
+        key = "↑";
+      }
+      else if(key == "ArrowDown") {
+        key = "↓";
+      }
+      else if(key == "ArrowLeft") {
+        key = "←";
+      }
+      else if(key == "ArrowRight") {
+        key = "→";
+      }
+      if (Input.keyHistory[3] == "") {
+        Input.keyHistory.push(key);
+      }
+      else {
+        Input.keyHistory.push(", " + key);
+      }
+      if (Input.keyHistory[0] != "") {
+        Input.keyHistory[0] = Input.keyHistory[0].replace(',', '');
+      }
+
+
+      console.log(key);
+      console.log(Input.keyHistory)
+
+
+      //if(event != "MouseDown")
       if (Input.keys[event.key] != true)
         Input.keysDown[event.key] = true;
       Input.keys[event.key] = true;
@@ -107,7 +141,32 @@ class Input {
     }
 
     function mousedown(event) {
-      //console.log("Mouse Down: " + event.button)
+      //FOR INPUT LENS
+      let key;
+      if(event.button == 0)
+      {
+        key = "RClick"
+      }
+      else if(event.button == 2)
+      {
+        key = "LClick"
+      }
+
+      Input.keyHistory.shift()
+      if (Input.keyHistory[3] == "") {
+        Input.keyHistory.push(key);
+      }
+      else {
+        Input.keyHistory.push(", " + key);
+      }
+      if (Input.keyHistory[0] != "") {
+        Input.keyHistory[0] = Input.keyHistory[0].replace(',', '');
+      }
+
+
+
+
+
       if (Input.mouseButtons["" + event.button] != true)
         Input.mouseButtonsDown["" + event.button] = true;
       Input.mouseButtons["" + event.button] = true;
@@ -141,37 +200,6 @@ class Input {
         event.stopPropagation();
       return false;
     }
-
-    //FOR INPUT LENS
-    function keypress(event) {
-      //console.log(`Keys: ${event.key}, Modifier keys: Control: ${event.ctrlKey}, Alt: ${event.altKey}, Shift: ${event.shiftKey}, Meta Key: ${event.metaKey}`);
-      let key = event.key;
-
-      Input.keyHistory.shift()
-      if(key == " ")
-      {
-        key = "Space";
-      }
-
-      if (Input.keyHistory[3] == "") 
-      {
-        Input.keyHistory.push(key);
-      }
-      else
-      {
-        Input.keyHistory.push(", " + key);
-
-      }
-      if(Input.keyHistory[0] != "")
-      {
-        Input.keyHistory[0] = Input.keyHistory[0].replace(',', '');
-      }
-
-      
-      console.log(key);
-      console.log(Input.keyHistory)
-    }
-
   }
 }
 

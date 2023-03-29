@@ -10,6 +10,7 @@ import LensesToggle from "./LensesToggle.js";
 import SceneLensGameObject from "./SceneLens-GameObject.js";
 import TimeLensGameObject from "./TimeLens-GameObject.js";
 import InputLensGameObject from "./InputLens-GameObject.js";
+import PressForControlsGameObject from "./PressForControls-GameObject.js";
 
 class StartScene extends Scene {
   constructor() {
@@ -33,7 +34,10 @@ class StartScene extends Scene {
     this.gameObjects.push(new StartSceneTitleGameObject(canvas.width / 2 - (canvas.width / 3), canvas.height / 2 - (canvas.width / 20)));
 
     //Press SPACE To Start
-    this.gameObjects.push(new PressStartGameObject(canvas.width / 2 - (canvas.width / 9), canvas.height / 2 + (canvas.width / 20)));
+    this.gameObjects.push(new PressStartGameObject(canvas.width / 2 - (canvas.width / 9), canvas.height / 2 + (canvas.width / 11)));
+
+    //Press CTRL For Controls
+    //this.gameObjects.push(new PressForControlsGameObject(canvas.width / 2 - (canvas.width / 8.3), canvas.height / 2 + (canvas.width / 20)));
 
     //Controller
     this.gameObjects.push(new ControllerGameObject());

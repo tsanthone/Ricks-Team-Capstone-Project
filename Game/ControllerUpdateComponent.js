@@ -9,6 +9,11 @@ import LensesToggle from "./LensesToggle.js";
 import SceneLensGameObject from "./SceneLens-GameObject.js";
 import TimeLensGameObject from "./TimeLens-GameObject.js";
 import InputLensGameObject from "./InputLens-GameObject.js";
+import Scene from "../Engine/Scene.js";
+import ControlsGameObject from "./Controls-GameObject.js";
+import PressStartGameObject from "./PressToStartGameObject.js";
+import StartSceneTitleGameObject from "./StartSceneTitle-GameObject.js";
+
 
 class ControllerUpdateComponent extends Component {
     constructor(parent) {
@@ -58,12 +63,39 @@ class ControllerUpdateComponent extends Component {
             Game.aiScore++;
         }
 
+        console.log(Game.scene(0).gameObjects)
+
+
+        const canvas = document.querySelector('canvas'); //For canvas dimensions
+
+
+        // let LensesToggle = false;
+        // if (Input.frameKeysDown["Enter"] == true) { // && Scene.currentSceneIndex == 0
+        //     console.log("WOWOWOWOWO")
+        //     LensesToggle = !LensesToggle;
+        //     if(LensesToggle == true)
+        //     {
+        //         let startSceneTitle = Game.FindByType("StartSceneTitleGameObject")[0];
+        //         startSceneTitle.markForDelete = true;
+        //         let pressToStart = Game.FindByType("PressStartGameObject")[0];
+        //         pressToStart.markForDelete = true;
+        //         Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 25, canvas.height * 9 / 10));
+        //     }
+        //     else
+        //     {
+        //         let controls = Game.FindByType("ControlsGameObject")[0];
+        //         controls.markForDelete = true;
+        //         Game.scene().gameObjects.push(new StartSceneTitleGameObject(canvas.width / 2 - (canvas.width / 3), canvas.height / 2 - (canvas.width / 20)));
+        //         Game.scene().gameObjects.push(new PressStartGameObject(canvas.width / 2 - (canvas.width / 9), canvas.height / 2 + (canvas.width / 11)));
+
+                
+        //     }
+        // }
+
 
 
 
         //LENSES
-        const canvas = document.querySelector('canvas'); //For canvas dimensions
-
         //Scene Lens
         if (Input.frameKeysDown["1"] == true) {
             if (LensesToggle.sceneLensToggle == false) {

@@ -16,16 +16,21 @@ class UserPaddleUpdateComponent extends Component{
         let proposedY = paddle.y;
 
         // If the user presses the w key then move up, if they press s move down.
-        if(Input.keys["w"] == true){
+        if(Input.keys["w"] == true || Input.getKey("ArrowUp")){
             proposedY -= this.vel * Time.secondsBetweenFrame;
         }
-        if(Input.keys["s"] == true){
+        if(Input.keys["s"] == true || Input.getKey("ArrowDown")){
             proposedY += this.vel * Time.secondsBetweenFrame;
         }
 
         // Prevents the user paddle from leaving the screen.
         if(proposedY > 0 && proposedY < Constants.maxY - paddle.h){
             paddle.y = proposedY;
+        }
+
+        if(Input.getMouseButtonDown(0) == true)
+        {
+            console.log("CLICKed")
         }
     }
 }
