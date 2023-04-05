@@ -8,3 +8,6 @@ Release Notes:
 Milestone 1 - Initial creation of the engine and some basic game objects.
 
 Milestone 2 - Full creation of the base PONG game, complete with start screen, play screen, and end screen.
+
+Milestone 3 - Created the mechanism from which to turn lenses on and off, as wells as created the first 3 out of 8 lenses.
+              These lenses are the scene, time, and input lenses.
