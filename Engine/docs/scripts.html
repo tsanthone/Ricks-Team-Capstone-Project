@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>scripts.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="Circle.html">
+                  Circle.js
+                </a>
+              
+                
+                <a class="source" href="CircleDraw.html">
+                  CircleDraw.js
+                </a>
+              
+                
+                <a class="source" href="Component.html">
+                  Component.js
+                </a>
+              
+                
+                <a class="source" href="Game.html">
+                  Game.js
+                </a>
+              
+                
+                <a class="source" href="GameObject.html">
+                  GameObject.js
+                </a>
+              
+                
+                <a class="source" href="Input.html">
+                  Input.js
+                </a>
+              
+                
+                <a class="source" href="Rectangle.html">
+                  Rectangle.js
+                </a>
+              
+                
+                <a class="source" href="RectangleDraw.html">
+                  RectangleDraw.js
+                </a>
+              
+                
+                <a class="source" href="Scene.html">
+                  Scene.js
+                </a>
+              
+                
+                <a class="source" href="Text.html">
+                  Text.js
+                </a>
+              
+                
+                <a class="source" href="TextDraw.html">
+                  TextDraw.js
+                </a>
+              
+                
+                <a class="source" href="Time.html">
+                  Time.js
+                </a>
+              
+                
+                <a class="source" href="scripts.html">
+                  scripts.js
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>scripts.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-1">&#x00a7;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">function</span> <span class="hljs-title function_">getCanvas</span>(<span class="hljs-params"></span>){
+    <span class="hljs-keyword">let</span> canvas = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;#canv&quot;</span>);
+    <span class="hljs-keyword">let</span> ctx = canvas.<span class="hljs-title function_">getContext</span>(<span class="hljs-string">&quot;2d&quot;</span>);
+
+    canvas.<span class="hljs-property">width</span> = <span class="hljs-variable language_">window</span>.<span class="hljs-property">innerWidth</span>;
+    canvas.<span class="hljs-property">height</span> = <span class="hljs-variable language_">window</span>.<span class="hljs-property">innerHeight</span>;
+    <span class="hljs-keyword">return</span> {canvas, ctx};
+}
+
+<span class="hljs-keyword">export</span> {getCanvas};</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
