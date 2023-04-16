@@ -5,7 +5,8 @@ class LensesToggle
     static sceneLensToggle = false;
     static timeLensToggle = false;
     static inputLensToggle = false;
-
+    static velocityLensToggle = false;
+    static componentLensToggle = false;
 
 
     reset()
@@ -13,6 +14,8 @@ class LensesToggle
         sceneLensToggle = false;
         timeLensToggle = false;
         inputLensToggle = false;
+        velocityLensToggle = false;
+        componentLensToggle = false;
     }
 }
 

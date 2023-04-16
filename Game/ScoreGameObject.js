@@ -3,7 +3,7 @@
 import Game from "../Engine/Game.js";
 import GameObject from "../Engine/GameObject.js";
 import Text from "../Engine/Text.js";
-import TextDraw from "../Engine/TextDraw.js";
+import TextDraw from "../engine/TextDraw.js";
 import Constants from "./Constants.js";
 import ScoreUpdateComponent from "./ScoreUpdateComponent.js";
 

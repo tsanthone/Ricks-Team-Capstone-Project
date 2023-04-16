@@ -15,7 +15,9 @@ import PressStartGameObject from "./PressToStartGameObject.js";
 import StartSceneTitleGameObject from "./StartSceneTitle-GameObject.js";
 import VelocityLensX from "./VelocityLensX.js";
 import VelocityLensY from "./VelocityLensY.js";
-
+import PointerGameObject from "./PointerGameObject.js";
+import ComponentListGameObject from "./ComponentListGameObject.js";
+import Rectangle from "../Engine/Rectangle.js";
 
 class ControllerUpdateComponent extends Component {
     constructor(parent) {
@@ -139,21 +141,84 @@ class ControllerUpdateComponent extends Component {
 
         // Velocities Lens
         if(Input.frameKeysDown["4"] == true){
-            if(LensesToggle.inputLensToggle == false){
-                LensesToggle.inputLensToggle = true;
+            if(LensesToggle.velocityLensToggle == false){
+                LensesToggle.velocityLensToggle = true;
                 let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
                 let xVel = Game.FindByType("BallGameObject")[0].getComponent("BallUpdateComponent").xVel;
                 let yVel = Game.FindByType("BallGameObject")[0].getComponent("BallUpdateComponent").yVel;
                 
-                Game.scene().gameObjects.push(new VelocityLensX(ball.x + ball.r, ball.y - 5, 100 * (xVel / 400), 10));
-                Game.scene().gameObjects.push(new VelocityLensY(ball.x - 5, ball.y + ball.r, 10, 100 * (yVel / 410)));
+                Game.scene().gameObjects.push(new VelocityLensX(ball.x, ball.y, 100 * (Math.abs(xVel) / 400), 10));
+                Game.scene().gameObjects.push(new VelocityLensY(ball.x, ball.y, 10, 100 * (Math.abs(yVel) / 410)));
             }
-            else if(LensesToggle.inputLensToggle == true){
-                LensesToggle.inputLensToggle = false;
+            else if(LensesToggle.velocityLensToggle == true){
+                LensesToggle.velocityLensToggle = false;
                 let velLensX = Game.FindByType("VelocityLensX")[0];
                 let velLensY = Game.FindByType("VelocityLensY")[0];
                 velLensX.markForDelete = true;
                 velLensY.markForDelete = true;
+            }
+        }
+
+        // Components Lens
+        if(Input.frameKeysDown["5"] == true){
+            if(LensesToggle.componentLensToggle == false){
+                LensesToggle.componentLensToggle = true;
+                let numGameObjects = Game.scene().gameObjects.length;
+
+                for(let i = 0; i < numGameObjects; i++){
+                    let currentGameObject = Game.scene().gameObjects[i];
+                    let component;
+                    let validObject = false;
+                    let width;
+                    let height;
+                    let x;
+                    let y;
+
+                    if(typeof currentGameObject.components[0].w == "number"){
+                        component = currentGameObject.getComponent("Rectangle");
+                        width = component.w;
+                        height = component.h;
+                        x = component.x;
+                        y = component.y
+                        validObject = true;
+                    }
+                    else if(typeof currentGameObject.components[0].r == "number"){
+                        component = currentGameObject.getComponent("Circle");
+                        width = component.r * 2;
+                        height = component.r * 2;
+                        validObject = true;
+                    }
+                    else if(typeof currentGameObject.components[0].x == "number"){
+                        component = currentGameObject.getComponent("Text");
+                        width = 20;
+                        height = 20;
+                        x = component.x;
+                        y = component.y;
+                        validObject = true;
+                    }
+                    
+                    if(validObject){
+                        let componentList = [];
+
+                        for(let j = 0; j < currentGameObject.components.length; j++){
+                            componentList.push(" " + currentGameObject.components[j].constructor.name);
+                        }
+
+                        Game.scene().gameObjects.push(new PointerGameObject(component.x, component.y, width, height, component));
+                        Game.scene().gameObjects.push(new ComponentListGameObject(component.x + width, component.y, componentList, component));
+                    }
+                }
+            }
+            else if(LensesToggle.componentLensToggle == true){
+                LensesToggle.componentLensToggle = false;
+                let numGameObjects = Game.FindByType("PointerGameObject").length;
+
+                for(let i = 0; i < numGameObjects; i++){
+                    let currentPointer = Game.FindByType("PointerGameObject")[i];
+                    let currentComponentList = Game.FindByType("ComponentListGameObject")[i];
+                    currentPointer.markForDelete = true;
+                    currentComponentList.markForDelete = true;
+                }
             }
         }
     }
