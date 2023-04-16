@@ -13,6 +13,8 @@ import Scene from "../Engine/Scene.js";
 import ControlsGameObject from "./Controls-GameObject.js";
 import PressStartGameObject from "./PressToStartGameObject.js";
 import StartSceneTitleGameObject from "./StartSceneTitle-GameObject.js";
+import VelocityLensX from "./VelocityLensX.js";
+import VelocityLensY from "./VelocityLensY.js";
 
 
 class ControllerUpdateComponent extends Component {
@@ -63,7 +65,7 @@ class ControllerUpdateComponent extends Component {
             Game.aiScore++;
         }
 
-        console.log(Game.scene(0).gameObjects)
+        // console.log(Game.scene(0).gameObjects)
 
 
         const canvas = document.querySelector('canvas'); //For canvas dimensions
@@ -132,6 +134,26 @@ class ControllerUpdateComponent extends Component {
                 LensesToggle.inputLensToggle = false;
                 let thisInputLens = Game.FindByType("InputLensGameObject")[0];
                 thisInputLens.markForDelete = true;
+            }
+        }
+
+        // Velocities Lens
+        if(Input.frameKeysDown["4"] == true){
+            if(LensesToggle.inputLensToggle == false){
+                LensesToggle.inputLensToggle = true;
+                let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
+                let xVel = Game.FindByType("BallGameObject")[0].getComponent("BallUpdateComponent").xVel;
+                let yVel = Game.FindByType("BallGameObject")[0].getComponent("BallUpdateComponent").yVel;
+                
+                Game.scene().gameObjects.push(new VelocityLensX(ball.x + ball.r, ball.y - 5, 100 * (xVel / 400), 10));
+                Game.scene().gameObjects.push(new VelocityLensY(ball.x - 5, ball.y + ball.r, 10, 100 * (yVel / 410)));
+            }
+            else if(LensesToggle.inputLensToggle == true){
+                LensesToggle.inputLensToggle = false;
+                let velLensX = Game.FindByType("VelocityLensX")[0];
+                let velLensY = Game.FindByType("VelocityLensY")[0];
+                velLensX.markForDelete = true;
+                velLensY.markForDelete = true;
             }
         }
     }

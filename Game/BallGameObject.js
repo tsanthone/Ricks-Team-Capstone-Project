@@ -1,6 +1,6 @@
 // Game object class for the PONG ball.
 
-import GameObject from "../engine/GameObject.js";
+import GameObject from "../Engine/GameObject.js";
 import Circle from "../engine/Circle.js";
 import CircleDraw from "../engine/CircleDraw.js";
 import BallUpdateComponent from "./BallUpdateComponent.js";

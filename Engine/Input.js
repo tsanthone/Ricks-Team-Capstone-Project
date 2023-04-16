@@ -123,8 +123,8 @@ class Input {
       }
 
 
-      console.log(key);
-      console.log(Input.keyHistory)
+      // console.log(key);
+      // console.log(Input.keyHistory)
 
 
       //if(event != "MouseDown")
