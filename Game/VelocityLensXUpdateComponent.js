@@ -18,10 +18,10 @@ class VelocityLensXUpdateComponent extends Component{
         let anchor;
 
         if(xVel > 0){
-            anchor = ball.x;
+            anchor = ball.x + ball.r;
         }
         else if(xVel < 0){
-            anchor = ball.x - rect.w;
+            anchor = ball.x - rect.w - ball.r;
         }
 
         if(rect.x != anchor || rect.y != ball.y - 5){
