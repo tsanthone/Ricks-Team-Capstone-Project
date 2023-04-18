@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Pong Game</title>
+    <link href="./style.css" rel="stylesheet">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏓</text></svg>">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"
+        integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script>
+</head>
+
+<body>
+    <canvas id="canv"></canvas>
+    <script type="module">
+
+        //Game Engine Imports
+        "use strict"
+        import { getCanvas} from "./Engine/scripts.js"
+        import Time from "./Engine/Time.js"
+        import Input from "./Engine/Input.js"
+        import Game from "./Engine/Game.js"
+
+        //Importing Scenes
+        import StartScene from "./Game/StartScene.js"
+        import PlayScene from "./Game/PlayScene.js";
+        import EndScene from "./Game/EndScene.js";
+
+        Input.attach(document);
+        let { canvas, ctx } = getCanvas();
+
+        
+        //Adding scenes to the scenes array
+        let startScene = new StartScene();
+        Game.scenes.push(startScene);
+        let playScene = new PlayScene();
+        Game.scenes.push(playScene);
+        
+        let endScene = new EndScene();
+        Game.scenes.push(endScene);
+        
+        Game.changeScene(0);
+        
+        //Useful stuff
+        //Game.scenes.push(scene);
+        //Game.currentSceneIndex = 0;//Redundant
+        
+
+        //Game Engine Time Handling
+        function tick()
+        {
+            Game.updateScene();
+            Input.update();
+            Game.scene().update();
+            Game.scene().draw(ctx);
+            Game.scene().remove();
+            Time.timePassed += Time.secondsBetweenFrame;
+        }
+        setInterval(tick, Time.millisecondsBetweenFrames)
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,5 @@
+/* Makes game fullscreen initial zoom % */
+*{ 
+  margin:0;
+  overflow: hidden;
+}
