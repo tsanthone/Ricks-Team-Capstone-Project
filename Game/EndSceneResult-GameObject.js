@@ -1,6 +1,6 @@
 import GameObject from "../Engine/GameObject.js"
 import Text from "../Engine/Text.js"
-import TextDraw from "../engine/TextDraw.js"
+import TextDraw from "../Engine/TextDraw.js"
 
 class EndSceneResultGameObject extends GameObject
 {

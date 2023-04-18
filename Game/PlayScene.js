@@ -14,6 +14,11 @@ import TimeLensGameObject from "./TimeLens-GameObject.js";
 import InputLensGameObject from "./InputLens-GameObject.js";
 import ColliderLensGameObject from "./ColliderLens-GameObject.js";
 import LayerLensGameObject from "./LayerLens-GameObject.js";
+import PointerGameObject from "./PointerGameObject.js";
+import ComponentListGameObject from "./ComponentListGameObject.js";
+import Game from "../Engine/Game.js";
+import VelocityLensX from "./VelocityLensX.js";
+import VelocityLensY from "./VelocityLensY.js";
 
 class PlayScene extends Scene {
     constructor() {
