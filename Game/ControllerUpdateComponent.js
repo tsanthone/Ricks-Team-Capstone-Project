@@ -30,6 +30,7 @@ import OriginCoordinatesCameraSpaceGameObject from "./OriginCoordinatesCameraSpa
 import BallCoordinatesCameraSpaceGameObject from "./BallCoordinatesCameraSpaceGameObject.js";
 import BallCoordinatesScreenSpaceGameObject from "./BallCoordinatesScreenSpaceGameObject.js";
 import OriginCoordinatesScreenSpaceGameObject from "./OriginCoordinatesScreenSpaceGameObject.js";
+import ScoreColliderGameObject from "./ScoreColliderGameObject.js";
 
 class ControllerUpdateComponent extends Component {
   constructor(parent) {
@@ -56,24 +57,24 @@ class ControllerUpdateComponent extends Component {
     }
 
     //////////////////    FOR TESTING     ////////////////////////
-    if (Input.keys["/"] == true) {
-      Game.changeScene(0);
-    }
-    if (Input.keys["*"] == true) {
-      Game.changeScene(1);
-      Game.userScore = 0;
-      Game.aiScore = 0;
-    }
-    if (Input.keys["-"] == true) {
-      Game.changeScene(2);
-    }
+    // if (Input.keys["/"] == true) {
+    //   Game.changeScene(0);
+    // }
+    // if (Input.keys["*"] == true) {
+    //   Game.changeScene(1);
+    //   Game.userScore = 0;
+    //   Game.aiScore = 0;
+    // }
+    // if (Input.keys["-"] == true) {
+    //   Game.changeScene(2);
+    // }
 
-    if (Input.keys["["] == true) {
-      Game.userScore++;
-    }
-    if (Input.keys["]"] == true) {
-      Game.aiScore++;
-    }
+    // if (Input.keys["["] == true) {
+    //   Game.userScore++;
+    // }
+    // if (Input.keys["]"] == true) {
+    //   Game.aiScore++;
+    // }
 
     // console.log(Game.scene(0).gameObjects)
 
@@ -249,8 +250,9 @@ class ControllerUpdateComponent extends Component {
         }
       }
     }
+
     //Collider Lens
-    if (Input.frameKeysDown["c"] == true) {
+    if (Input.frameKeysDown["0"] == true) {
       if (LensesToggle.colliderLensToggle == false) {
         LensesToggle.colliderLensToggle = true;
         Game.scene().gameObjects.push(
@@ -259,20 +261,23 @@ class ControllerUpdateComponent extends Component {
             (canvas.height * 9) / 10
           )
         );
+        Game.scene().gameObjects.push(new ScoreColliderGameObject());
       }
       //If the collider lens is already on, return the color settings back to default then delete the lens
       else if (LensesToggle.colliderLensToggle == true) {
         LensesToggle.colliderLensToggle = false;
         let thisColliderLens = Game.FindByType("ColliderLensGameObject")[0];
+        let scoreCollider = Game.FindByType("ScoreColliderGameObject")[0];
         Game.scene().gameObjects.push(
           new ReturnDefaultSettings(canvas.width / 25, (canvas.height * 9) / 10)
         );
         thisColliderLens.markForDelete = true;
+        scoreCollider.markForDelete = true;
       }
     }
 
     //Layer Lens
-    if (Input.frameKeysDown["l"] == true) {
+    if (Input.frameKeysDown["-"] == true) {
       if (LensesToggle.layerLensToggle == false) {
         LensesToggle.layerLensToggle = true;
         Game.scene().gameObjects.push(

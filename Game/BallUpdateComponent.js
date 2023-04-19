@@ -38,14 +38,14 @@ class BallUpdateComponent extends Component{
             ball.x = proposedX;
         }
         else{
-            if(proposedX > 0 + ball.r && proposedX < Constants.maxX - ball.r){
+            if(proposedX > 0 + ball.r + 70 && proposedX < Constants.maxX - ball.r - 70){
                 this.xVel *= -1;
             }
-            else if(proposedX < 0 + ball.r){
+            else if(proposedX < 0 + ball.r + 70){
                 Game.aiScore++;
                 Game.scene().restart();
             }
-            else if(proposedX > Constants.maxX - ball.r){
+            else if(proposedX > Constants.maxX - ball.r - 70){
                 Game.userScore++;
                 Game.scene().restart();
             }

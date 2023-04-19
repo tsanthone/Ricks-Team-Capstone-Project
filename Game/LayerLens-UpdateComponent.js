@@ -11,7 +11,7 @@ class LayerLensUpdateComponent extends Component {
   
     text.text = 
     //"                                                                                                                  " +
-    "Blue: Foreground objects   Green: Standard UI elements   Red: Lenses UI"; 
+    "Blue: Foreground Objects   Green: Standard UI Elements   Red: Lenses UI"; 
   }
 }
 
