@@ -63,23 +63,14 @@ class StartScene extends Scene {
     }
 
     //Title
-    this.gameObjects.push(
-      new StartSceneTitleGameObject(
-        canvas.width / 2 - canvas.width / 3,
-        canvas.height / 2 - canvas.width / 20
-      )
-    );
+    this.gameObjects.push(new StartSceneTitleGameObject(canvas.width / 2 - (canvas.width / 3), canvas.height / 2 - (canvas.height / 20)));
 
-    //Press SPACE To Start
-    this.gameObjects.push(
-      new PressStartGameObject(
-        canvas.width / 2 - canvas.width / 9,
-        canvas.height / 2 + canvas.width / 11
-      )
-    );
+    //Press ENTER To Start
+    this.gameObjects.push(new PressStartGameObject(canvas.width / 2 - (canvas.width / 9), canvas.height / 2 + (canvas.height / 11)));
 
-    //Press CTRL For Controls
-    //this.gameObjects.push(new PressForControlsGameObject(canvas.width / 2 - (canvas.width / 8.3), canvas.height / 2 + (canvas.width / 20)));
+    //Press F For Controls
+    this.gameObjects.push(new PressForControlsGameObject(canvas.width / 2 - (canvas.width / 14), canvas.height / 2 + (canvas.height / 6)));
+
 
     //Controller
     this.gameObjects.push(new ControllerGameObject());

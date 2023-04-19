@@ -31,6 +31,7 @@ import BallCoordinatesCameraSpaceGameObject from "./BallCoordinatesCameraSpaceGa
 import BallCoordinatesScreenSpaceGameObject from "./BallCoordinatesScreenSpaceGameObject.js";
 import OriginCoordinatesScreenSpaceGameObject from "./OriginCoordinatesScreenSpaceGameObject.js";
 import ScoreColliderGameObject from "./ScoreColliderGameObject.js";
+import PressForControlsGameObject from "./PressForControls-GameObject.js";
 
 class ControllerUpdateComponent extends Component {
   constructor(parent) {
@@ -56,51 +57,77 @@ class ControllerUpdateComponent extends Component {
       Game.aiScore = 0;
     }
 
-    //////////////////    FOR TESTING     ////////////////////////
-    // if (Input.keys["/"] == true) {
-    //   Game.changeScene(0);
-    // }
-    // if (Input.keys["*"] == true) {
-    //   Game.changeScene(1);
-    //   Game.userScore = 0;
-    //   Game.aiScore = 0;
-    // }
-    // if (Input.keys["-"] == true) {
-    //   Game.changeScene(2);
-    // }
-
-    // if (Input.keys["["] == true) {
-    //   Game.userScore++;
-    // }
-    // if (Input.keys["]"] == true) {
-    //   Game.aiScore++;
-    // }
-
-    // console.log(Game.scene(0).gameObjects)
+        //Cheats
+        if (Input.keys["["] == true) {
+          Game.userScore++;
+        }
+        if (Input.keys["]"] == true) {
+          Game.aiScore++;
+        }
 
     const canvas = document.querySelector("canvas"); //For canvas dimensions
 
-    // let LensesToggle = false;
-    // if (Input.frameKeysDown["Enter"] == true) { // && Scene.currentSceneIndex == 0
-    //     console.log("WOWOWOWOWO")
-    //     LensesToggle = !LensesToggle;
-    //     if(LensesToggle == true)
-    //     {
-    //         let startSceneTitle = Game.FindByType("StartSceneTitleGameObject")[0];
-    //         startSceneTitle.markForDelete = true;
-    //         let pressToStart = Game.FindByType("PressStartGameObject")[0];
-    //         pressToStart.markForDelete = true;
-    //         Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 25, canvas.height * 9 / 10));
-    //     }
-    //     else
-    //     {
-    //         let controls = Game.FindByType("ControlsGameObject")[0];
-    //         controls.markForDelete = true;
-    //         Game.scene().gameObjects.push(new StartSceneTitleGameObject(canvas.width / 2 - (canvas.width / 3), canvas.height / 2 - (canvas.width / 20)));
-    //         Game.scene().gameObjects.push(new PressStartGameObject(canvas.width / 2 - (canvas.width / 9), canvas.height / 2 + (canvas.width / 11)));
+    // If the player is on the start scene (currentSceneIndex of 0), and they press the "Enter" key, they should be sent to the play scene (currentSceneIndex of 1).
+    if (Game.currentSceneIndex == 0 && Input.frameKeysDown["f"] == true || Input.frameKeysDown["F"] == true) {
+      if (LensesToggle.controlsMenuToggle == false) {
+        //Remove Main Menu
+        LensesToggle.controlsMenuToggle = true;
+        let startSceneTitle = Game.FindByType("StartSceneTitleGameObject")[0];
+        startSceneTitle.markForDelete = true;
+        let pressToStart = Game.FindByType("PressStartGameObject")[0];
+        pressToStart.markForDelete = true;
+        let pressForControls = Game.FindByType("PressForControlsGameObject")[0];
+        pressForControls.markForDelete = true;
 
-    //     }
-    // }
+        //Add Controls
+        Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 3 + 125, canvas.height / 10, "Controls"));
+        Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 3 - 150, canvas.height / 5, "Game"));
+        Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 3 + 600, canvas.height / 5, "Lenses"));
+        Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 3 - 160, canvas.height / 5 + 250, "Cheats"));
+        Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 2 - 150, canvas.height - canvas.height / 20, "Press F to go back"));
+
+
+        //Game
+        Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 100, canvas.height / 5 + 100, "↑ or W: Move Up"));
+        Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 100, canvas.height / 5 + 150, "↓ or D : Move Down"));
+
+        //Cheats
+        Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 100, canvas.height / 5 + 350, "[ : Give Player Points"));
+        Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 100, canvas.height / 5 + 400, "] : Give Bot Points"));
+
+
+        //Lenses
+        Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 900, canvas.height / 5 + 100, "1 : Scene Lens"));
+        Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 900, canvas.height / 5 + 150, "2 : Time Lens"));
+        Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 900, canvas.height / 5 + 200, "3 : Input Lens"));
+        Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 900, canvas.height / 5 + 250, "4 : Velocity Lens"));
+        Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 900, canvas.height / 5 + 300, "5 : Components Lens"));
+        Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 900, canvas.height / 5 + 350, "6 : World Space Lens"));
+        Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 900, canvas.height / 5 + 400, "7 : Object Space Lens"));
+        Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 900, canvas.height / 5 + 450, "8 : Camera Space Lens"));
+        Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 900, canvas.height / 5 + 500, "9 : Screen Space Lens"));
+        Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 900, canvas.height / 5 + 550, "0 : Colliders Lens"));
+        Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 900, canvas.height / 5 + 600, "- : Layers Lens"));
+
+
+
+
+
+      }
+      else {
+        //Remove Controls
+        LensesToggle.controlsMenuToggle = false;
+        let controls = Game.FindByType("ControlsGameObject");
+        for (let i = 0; i < controls.length; i++) {
+          controls[i].markForDelete = true;
+        }
+
+        //Add Main Menu Back
+        Game.scene().gameObjects.push(new PressForControlsGameObject(canvas.width / 2 - (canvas.width / 14), canvas.height / 2 + (canvas.height / 6)));
+        Game.scene().gameObjects.push(new PressStartGameObject(canvas.width / 2 - (canvas.width / 9), canvas.height / 2 + (canvas.height / 11)));
+        Game.scene().gameObjects.push(new StartSceneTitleGameObject(canvas.width / 2 - (canvas.width / 3), canvas.height / 2 - (canvas.height / 20)));
+      }
+    }
 
     //LENSES
     //Scene Lens

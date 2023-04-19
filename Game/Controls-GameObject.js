@@ -4,19 +4,27 @@ import TextDraw from "../engine/TextDraw.js"
 import PressToStartUpdateComponent from "./PressToStartUpdateComponent.js"
 
 class ControlsGameObject extends GameObject{
-  constructor(x,y){
+  constructor(x,y, inputText){
     super();
-    this.x = 0;//x;
-    this.y = 100;//y;
+    this.x = x;//x;
+    this.y = y;//y;
+    this.inputText = inputText;
     this.start();
   }
   start(){
     const canvas = document.querySelector('canvas');
     let font = (canvas.height / 20) + "px sans"
 
-    this.components.push(new Text(this, this.x,this.y,
-      "Controls" + "\n 1 : Scene Lens\n2 : Time Lens\n3 : Input Lens\n"
-      , font))
+    if(this.inputText == "Controls")
+    {
+      font = (canvas.height / 10) + "px sans"
+    }
+    else if(this.inputText =="Press F to go back")
+    {
+      font = (canvas.height / 30) + "px sans"
+    }
+
+    this.components.push(new Text(this, this.x,this.y, this.inputText, font))
     this.components.push(new TextDraw(this, "white", "white"))
   }
 }

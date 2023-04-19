@@ -13,6 +13,7 @@ class LensesToggle
     static objectSpaceToggle = false;
     static cameraSpaceToggle = false;
     static screenSpaceToggle = false;
+    static controlsMenuToggle = false;
 
     reset()
     {
