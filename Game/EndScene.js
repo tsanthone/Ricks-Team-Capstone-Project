@@ -25,7 +25,8 @@ import OriginCoordinatesCameraSpaceGameObject from "./OriginCoordinatesCameraSpa
 import BallCoordinateCameraSpaceGameObject from "./BallCoordinatesCameraSpaceGameObject.js";
 import BallCoordinatesScreenSpaceGameObject from "./BallCoordinatesScreenSpaceGameObject.js";
 import OriginCoordinatesScreenSpaceGameObject from "./OriginCoordinatesScreenSpaceGameObject.js";
-
+import PointerGameObject from "./PointerGameObject.js";
+import ComponentListGameObject from "./ComponentListGameObject.js";
 
 class EndScene extends Scene {
   constructor() {
