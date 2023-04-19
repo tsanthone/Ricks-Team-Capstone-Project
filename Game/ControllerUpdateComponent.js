@@ -32,6 +32,7 @@ import BallCoordinatesScreenSpaceGameObject from "./BallCoordinatesScreenSpaceGa
 import OriginCoordinatesScreenSpaceGameObject from "./OriginCoordinatesScreenSpaceGameObject.js";
 import ScoreColliderGameObject from "./ScoreColliderGameObject.js";
 import PressForControlsGameObject from "./PressForControls-GameObject.js";
+import VelocityLensZ from "./VelocityLensZ.js";
 
 class ControllerUpdateComponent extends Component {
   constructor(parent) {
@@ -193,25 +194,23 @@ class ControllerUpdateComponent extends Component {
       if (LensesToggle.velocityLensToggle == false) {
         LensesToggle.velocityLensToggle = true;
         let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
-        let xVel = Game.FindByType("BallGameObject")[0].getComponent(
-          "BallUpdateComponent"
-        ).xVel;
-        let yVel = Game.FindByType("BallGameObject")[0].getComponent(
-          "BallUpdateComponent"
-        ).yVel;
+        let xVel = Game.FindByType("BallGameObject")[0].getComponent("BallUpdateComponent").xVel;
+        let yVel = Game.FindByType("BallGameObject")[0].getComponent("BallUpdateComponent").yVel;
+        let xWidth = 100 * (Math.abs(xVel) / 400);
+        let yHieght = 100 * (Math.abs(yVel) / 410);
 
-        Game.scene().gameObjects.push(
-          new VelocityLensX(ball.x, ball.y, 100 * (Math.abs(xVel) / 400), 10)
-        );
-        Game.scene().gameObjects.push(
-          new VelocityLensY(ball.x, ball.y, 10, 100 * (Math.abs(yVel) / 410))
-        );
-      } else if (LensesToggle.velocityLensToggle == true) {
+        Game.scene().gameObjects.push(new VelocityLensX(ball.x, ball.y, xWidth, 10));
+        Game.scene().gameObjects.push(new VelocityLensY(ball.x, ball.y, 10, yHieght));
+        Game.scene().gameObjects.push(new VelocityLensZ(ball.x, ball.y, 7.5));
+      } 
+      else if (LensesToggle.velocityLensToggle == true) {
         LensesToggle.velocityLensToggle = false;
         let velLensX = Game.FindByType("VelocityLensX")[0];
         let velLensY = Game.FindByType("VelocityLensY")[0];
+        let velLensZ = Game.FindByType("VelocityLensZ")[0];
         velLensX.markForDelete = true;
         velLensY.markForDelete = true;
+        velLensZ.markForDelete = true;
       }
     }
 

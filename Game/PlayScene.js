@@ -28,6 +28,7 @@ import BallCoordinateCameraSpaceGameObject from "./BallCoordinatesCameraSpaceGam
 import BallCoordinatesScreenSpaceGameObject from "./BallCoordinatesScreenSpaceGameObject.js";
 import OriginCoordinatesScreenSpaceGameObject from "./OriginCoordinatesScreenSpaceGameObject.js";
 import GridOverlayGameObject from "./GridOverlayGameObject.js";
+import VelocityLensZ from "./VelocityLensZ.js";
 
 class PlayScene extends Scene {
   constructor() {
@@ -106,6 +107,7 @@ class PlayScene extends Scene {
       Game.scene().gameObjects.push(
         new VelocityLensY(ball.x, ball.y, 10, 100 * (Math.abs(yVel) / 410))
       );
+      Game.scene().gameObjects.push(new VelocityLensZ(ball.x, ball.y, 7.5));
     }
     if (LensesToggle.componentLensToggle == true) {
       LensesToggle.componentLensToggle = true;
