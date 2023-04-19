@@ -9,6 +9,10 @@ class LensesToggle
     static componentLensToggle = false;
     static colliderLensToggle = false;
     static layerLensToggle = false;
+    static worldSpaceToggle = false;
+    static objectSpaceToggle = false;
+    static cameraSpaceToggle = false;
+    static screenSpaceToggle = false;
 
     reset()
     {
@@ -19,6 +23,10 @@ class LensesToggle
         componentLensToggle = false;
         colliderLensToggle = false;
         layerLensToggle = false;
+        worldSpaceToggle = false;
+        objectSpaceToggle = false;
+        cameraSpaceToggle = false;
+        screenSpaceToggle = false;
     }
 }
 

@@ -19,117 +19,216 @@ import ComponentListGameObject from "./ComponentListGameObject.js";
 import Game from "../Engine/Game.js";
 import VelocityLensX from "./VelocityLensX.js";
 import VelocityLensY from "./VelocityLensY.js";
+import OriginCoordinatesDisplayGameObject from "./OriginCoordinatesDisplayGameObject.js";
+import BallCoordinatesDisplayGameObject from "./BallCoordinatesDisplayGameObject.js";
+import OriginCoordinatesObjectSpaceGameObject from "./OriginCoordinatesObjectSpaceGameObject.js";
+import BallCoordinateObjectSpaceGameObject from "./BallCoordinateObjectSpaceGameObject.js";
+import OriginCoordinatesCameraSpaceGameObject from "./OriginCoordinatesCameraSpaceGameObject.js";
+import BallCoordinateCameraSpaceGameObject from "./BallCoordinatesCameraSpaceGameObject.js";
+import BallCoordinatesScreenSpaceGameObject from "./BallCoordinatesScreenSpaceGameObject.js";
+import OriginCoordinatesScreenSpaceGameObject from "./OriginCoordinatesScreenSpaceGameObject.js";
+import GridOverlayGameObject from "./GridOverlayGameObject.js";
 
 class PlayScene extends Scene {
-    constructor() {
-        super("Play Scene");
+  constructor() {
+    super("Play Scene");
+  }
+
+  start() {
+    // Add Mid-Field Bar
+    let totalBars = 12;
+    let midBarY = 20;
+    for (let i = 0; i < totalBars; i++) {
+      this.gameObjects.push(new MidFieldBarGameObject(midBarY));
+      midBarY += 80; // Adds 2X the height of a mid field bar dash to the Y so that the next one is spread down.
     }
 
-    start() {
-        // Add Mid-Field Bar
-        let totalBars = 12;
-        let midBarY = 20;
-        for (let i = 0; i < totalBars; i++) {
-            this.gameObjects.push(new MidFieldBarGameObject(midBarY));
-            midBarY += 80; // Adds 2X the height of a mid field bar dash to the Y so that the next one is spread down.
-        }
+    // Add PONG Ball
+    this.gameObjects.push(
+      new BallGameObject(Constants.maxX / 2, Constants.maxY / 2)
+    );
 
-        // Add PONG Ball
-        this.gameObjects.push(new BallGameObject(Constants.maxX / 2, Constants.maxY / 2));
+    // Add Score
+    this.gameObjects.push(new ScoreGameObject());
 
-        // Add Score
-        this.gameObjects.push(new ScoreGameObject());
+    // Add User Controlled Paddle
+    this.gameObjects.push(new UserPaddleGameObject(40, 40));
 
-        // Add User Controlled Paddle
-        this.gameObjects.push(new UserPaddleGameObject(40, 40));
+    // Add AI Controlled Paddle
+    this.gameObjects.push(
+      new AIPaddleGameObject(Constants.maxX - 80, Constants.maxY - 215)
+    );
 
-        // Add AI Controlled Paddle
-        this.gameObjects.push(new AIPaddleGameObject(Constants.maxX - 80, Constants.maxY - 215));
+    //////////////////    FOR TESTING     ////////////////////////
+    this.gameObjects.push(new ControllerGameObject());
 
+    //Lenses
+    const canvas = document.querySelector("canvas");
 
-
-
-        //////////////////    FOR TESTING     ////////////////////////
-        this.gameObjects.push(new ControllerGameObject());
-
-
-
-        //Lenses
-        const canvas = document.querySelector('canvas');
-
-        //Lenses
-        if (LensesToggle.sceneLensToggle == true) {
-            this.gameObjects.push(new SceneLensGameObject(canvas.width / 25, canvas.height * 9 / 10));
-        }
-        if (LensesToggle.timeLensToggle == true) {
-            this.gameObjects.push(new TimeLensGameObject(canvas.width / 25, canvas.height * 9 / 10));
-        }
-        if (LensesToggle.inputLensToggle == true) {
-            this.gameObjects.push(new InputLensGameObject(canvas.width / 25, canvas.height * 9 / 10));
-        }
-        if (LensesToggle.colliderLensToggle == true) {
-            this.gameObjects.push(new ColliderLensGameObject(canvas.width / 25, canvas.height * 9 / 10));
-        }
-        if (LensesToggle.layerLensToggle == true) {
-            this.gameObjects.push(new LayerLensGameObject(canvas.width / 25, canvas.height * 9 / 10));
-        }
-        if(LensesToggle.velocityLensToggle == true){
-            let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
-            let xVel = Game.FindByType("BallGameObject")[0].getComponent("BallUpdateComponent").xVel;
-            let yVel = Game.FindByType("BallGameObject")[0].getComponent("BallUpdateComponent").yVel;
-                      
-            Game.scene().gameObjects.push(new VelocityLensX(ball.x, ball.y, 100 * (Math.abs(xVel) / 400), 10));
-            Game.scene().gameObjects.push(new VelocityLensY(ball.x, ball.y, 10, 100 * (Math.abs(yVel) / 410)));   
-          }
-        if(LensesToggle.componentLensToggle == true){
-            LensesToggle.componentLensToggle = true;
-            let numGameObjects = Game.scene().gameObjects.length;
-      
-            for(let i = 0; i < numGameObjects; i++){
-                let currentGameObject = Game.scene().gameObjects[i];
-                let component;
-                let validObject = false;
-                let width;
-                let height;
-                let x;
-                let y;
-      
-                if(typeof currentGameObject.components[0].w == "number"){
-                    component = currentGameObject.getComponent("Rectangle");
-                    width = component.w;
-                    height = component.h;
-                    x = component.x;
-                    y = component.y
-                    validObject = true;
-                }
-                else if(typeof currentGameObject.components[0].r == "number"){
-                    component = currentGameObject.getComponent("Circle");
-                    width = component.r * 2;
-                    height = component.r * 2;
-                    validObject = true;
-                }
-                else if(typeof currentGameObject.components[0].x == "number"){
-                    component = currentGameObject.getComponent("Text");
-                    width = 20;
-                    height = 20;
-                    x = component.x;
-                    y = component.y;
-                    validObject = true;
-                }
-                
-                if(validObject){
-                    let componentList = [];
-      
-                    for(let j = 0; j < currentGameObject.components.length; j++){
-                        componentList.push(" " + currentGameObject.components[j].constructor.name);
-                    }
-      
-                    Game.scene().gameObjects.push(new PointerGameObject(component.x, component.y, width, height, component));
-                    Game.scene().gameObjects.push(new ComponentListGameObject(component.x + width, component.y, componentList, component));
-                }
-            }
-          }
+    //Lenses
+    if (LensesToggle.sceneLensToggle == true) {
+      this.gameObjects.push(
+        new SceneLensGameObject(canvas.width / 25, (canvas.height * 9) / 10)
+      );
     }
+    if (LensesToggle.timeLensToggle == true) {
+      this.gameObjects.push(
+        new TimeLensGameObject(canvas.width / 25, (canvas.height * 9) / 10)
+      );
+    }
+    if (LensesToggle.inputLensToggle == true) {
+      this.gameObjects.push(
+        new InputLensGameObject(canvas.width / 25, (canvas.height * 9) / 10)
+      );
+    }
+    if (LensesToggle.colliderLensToggle == true) {
+      this.gameObjects.push(
+        new ColliderLensGameObject(canvas.width / 25, (canvas.height * 9) / 10)
+      );
+    }
+    if (LensesToggle.layerLensToggle == true) {
+      this.gameObjects.push(
+        new LayerLensGameObject(canvas.width / 25, (canvas.height * 9) / 10)
+      );
+    }
+    if (LensesToggle.velocityLensToggle == true) {
+      let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
+      let xVel = Game.FindByType("BallGameObject")[0].getComponent(
+        "BallUpdateComponent"
+      ).xVel;
+      let yVel = Game.FindByType("BallGameObject")[0].getComponent(
+        "BallUpdateComponent"
+      ).yVel;
+
+      Game.scene().gameObjects.push(
+        new VelocityLensX(ball.x, ball.y, 100 * (Math.abs(xVel) / 400), 10)
+      );
+      Game.scene().gameObjects.push(
+        new VelocityLensY(ball.x, ball.y, 10, 100 * (Math.abs(yVel) / 410))
+      );
+    }
+    if (LensesToggle.componentLensToggle == true) {
+      LensesToggle.componentLensToggle = true;
+      let numGameObjects = Game.scene().gameObjects.length;
+
+      for (let i = 0; i < numGameObjects; i++) {
+        let currentGameObject = Game.scene().gameObjects[i];
+        let component;
+        let validObject = false;
+        let width;
+        let height;
+        let x;
+        let y;
+
+        if (typeof currentGameObject.components[0].w == "number") {
+          component = currentGameObject.getComponent("Rectangle");
+          width = component.w;
+          height = component.h;
+          x = component.x;
+          y = component.y;
+          validObject = true;
+        } else if (typeof currentGameObject.components[0].r == "number") {
+          component = currentGameObject.getComponent("Circle");
+          width = component.r * 2;
+          height = component.r * 2;
+          validObject = true;
+        } else if (typeof currentGameObject.components[0].x == "number") {
+          component = currentGameObject.getComponent("Text");
+          width = 20;
+          height = 20;
+          x = component.x;
+          y = component.y;
+          validObject = true;
+        }
+
+        if (validObject) {
+          let componentList = [];
+
+          for (let j = 0; j < currentGameObject.components.length; j++) {
+            componentList.push(
+              " " + currentGameObject.components[j].constructor.name
+            );
+          }
+
+          Game.scene().gameObjects.push(
+            new PointerGameObject(
+              component.x,
+              component.y,
+              width,
+              height,
+              component
+            )
+          );
+          Game.scene().gameObjects.push(
+            new ComponentListGameObject(
+              component.x + width,
+              component.y,
+              componentList,
+              component
+            )
+          );
+        }
+      }
+    }
+
+    if (LensesToggle.worldSpaceToggle == true) {
+      Game.scene().gameObjects.push(new GridOverlayGameObject());
+      Game.scene().gameObjects.push(
+        new OriginCoordinatesDisplayGameObject(10, 20)
+      );
+      let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
+      if (ball) {
+        Game.scene().gameObjects.push(
+          new BallCoordinatesDisplayGameObject(ball, 15, -15) // Adjust offsets here
+        );
+      }
+    }
+
+    if (LensesToggle.objectSpaceToggle == true) {
+      Game.scene().gameObjects.push(new GridOverlayGameObject());
+      let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
+      Game.scene().gameObjects.push(
+        new OriginCoordinatesObjectSpaceGameObject(ball, 10, 20, 10)
+      );
+
+      if (ball) {
+        Game.scene().gameObjects.push(
+          new BallCoordinateObjectSpaceGameObject(ball, 15, -15) // Adjust offsets here
+        );
+      }
+    }
+    if (LensesToggle.cameraSpaceToggle == true) {
+      Game.scene().gameObjects.push(new GridOverlayGameObject());
+      let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
+      Game.scene().gameObjects.push(
+        new OriginCoordinatesCameraSpaceGameObject(canvas.width, canvas.height)
+      );
+
+      if (ball) {
+        Game.scene().gameObjects.push(
+          new BallCoordinateCameraSpaceGameObject(
+            ball,
+            canvas.width,
+            canvas.height
+          ) // Adjust offsets here
+        );
+      }
+    }
+
+    if (LensesToggle.screenSpaceToggle == true) {
+      Game.scene().gameObjects.push(new GridOverlayGameObject());
+      let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
+      Game.scene().gameObjects.push(
+        new OriginCoordinatesScreenSpaceGameObject(10)
+      );
+
+      if (ball) {
+        Game.scene().gameObjects.push(
+          new BallCoordinatesScreenSpaceGameObject(ball, 15, -15) // Adjust offsets here
+        );
+      }
+    }
+  }
 }
 
 export default PlayScene;
