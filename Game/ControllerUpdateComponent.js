@@ -65,6 +65,20 @@ class ControllerUpdateComponent extends Component {
           Game.aiScore++;
         }
 
+        //Pause
+        if (Input.frameKeysDown["p"] == true || Input.frameKeysDown["P"] == true) {
+          if(LensesToggle.pause == false)
+          {
+            LensesToggle.pause = true;
+            Time.secondsBetweenFrame = 0;
+          }
+          else
+          {
+            LensesToggle.pause = false;
+            Time.secondsBetweenFrame = .01;
+          }
+        }
+
     const canvas = document.querySelector("canvas"); //For canvas dimensions
 
     // If the player is on the start scene (currentSceneIndex of 0), and they press the "Enter" key, they should be sent to the play scene (currentSceneIndex of 1).
@@ -94,6 +108,7 @@ class ControllerUpdateComponent extends Component {
         //Cheats
         Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 100, canvas.height / 5 + 350, "[ : Give Player Points"));
         Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 100, canvas.height / 5 + 400, "] : Give Bot Points"));
+        Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 100, canvas.height / 5 + 450, "P : Pause"));
 
 
         //Lenses
@@ -108,6 +123,7 @@ class ControllerUpdateComponent extends Component {
         Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 900, canvas.height / 5 + 500, "9 : Screen Space Lens"));
         Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 900, canvas.height / 5 + 550, "0 : Colliders Lens"));
         Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 900, canvas.height / 5 + 600, "- : Layers Lens"));
+        
 
 
 

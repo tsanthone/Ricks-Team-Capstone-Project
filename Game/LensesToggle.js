@@ -14,6 +14,7 @@ class LensesToggle
     static cameraSpaceToggle = false;
     static screenSpaceToggle = false;
     static controlsMenuToggle = false;
+    static pause = false;
 
     reset()
     {
