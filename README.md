@@ -13,3 +13,7 @@ Milestone 2 - Full creation of the base PONG game, complete with start screen, p
 
 Milestone 3 - Created the mechanism from which to turn lenses on and off, as wells as created the first 3 out of 8 lenses.
               These lenses are the scene, time, and input lenses.
+
+Milestone 4 - Completion of the rest of the lenses. Those being the velocities, components, spaces, colliders, and layers.
+              We have also implemented a pause feature in order to get a better look at the lenses while the game is playing.
+              Finally we added a controls menu at the start scene so that the user can see all the controls.
