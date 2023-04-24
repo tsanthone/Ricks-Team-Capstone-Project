@@ -201,16 +201,22 @@ class ControllerUpdateComponent extends Component {
 
         Game.scene().gameObjects.push(new VelocityLensX(ball.x, ball.y, xWidth, 10));
         Game.scene().gameObjects.push(new VelocityLensY(ball.x, ball.y, 10, yHieght));
-        Game.scene().gameObjects.push(new VelocityLensZ(ball.x, ball.y, 7.5));
+
+        for(let i = 3; i < 10; i++){
+          Game.scene().gameObjects.push(new VelocityLensZ(ball.x, ball.y, 7.5, i / 10));
+        }
       } 
       else if (LensesToggle.velocityLensToggle == true) {
         LensesToggle.velocityLensToggle = false;
         let velLensX = Game.FindByType("VelocityLensX")[0];
         let velLensY = Game.FindByType("VelocityLensY")[0];
-        let velLensZ = Game.FindByType("VelocityLensZ")[0];
+        for(let i = 0; i < 7; i++){
+          let velLensZ = Game.FindByType("VelocityLensZ")[i];
+          velLensZ.markForDelete = true;
+        }
+        
         velLensX.markForDelete = true;
         velLensY.markForDelete = true;
-        velLensZ.markForDelete = true;
       }
     }
 

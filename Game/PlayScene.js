@@ -107,7 +107,9 @@ class PlayScene extends Scene {
       Game.scene().gameObjects.push(
         new VelocityLensY(ball.x, ball.y, 10, 100 * (Math.abs(yVel) / 410))
       );
-      Game.scene().gameObjects.push(new VelocityLensZ(ball.x, ball.y, 7.5));
+      for(let i = 3; i < 10; i++){
+        Game.scene().gameObjects.push(new VelocityLensZ(ball.x, ball.y, 7.5, i / 10));
+      }
     }
     if (LensesToggle.componentLensToggle == true) {
       LensesToggle.componentLensToggle = true;

@@ -17,12 +17,7 @@ class VelocityLensYUpdateComponent extends Component{
         let rect = this.parent.getComponent("Rectangle");
         let anchor;
 
-        if(yVel > 0){
-            anchor = ball.y + ball.r;
-        }
-        else if(yVel < 0){
-            anchor = ball.y - rect.h - ball.r;
-        }
+        anchor = ball.y - rect.h - ball.r;
 
         if(rect.y != anchor || rect.x != ball.x - 5){
             rect.y = anchor;
