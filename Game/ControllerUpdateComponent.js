@@ -1,15 +1,18 @@
-// Update component for the Controller game object.
+/**
+ * File: ControllerUpdateComponent.js
+ * Description: This file handles all of the updates for the controller game object such as inputs, lenses, and
+ * other features.
+ */
 
+// Imports
 import Component from "../Engine/Component.js";
 import Game from "../Engine/Game.js";
 import Input from "../Engine/Input.js";
 import Time from "../Engine/Time.js";
-import Constants from "./Constants.js";
 import LensesToggle from "./LensesToggle.js";
 import SceneLensGameObject from "./SceneLens-GameObject.js";
 import TimeLensGameObject from "./TimeLens-GameObject.js";
 import InputLensGameObject from "./InputLens-GameObject.js";
-import Scene from "../Engine/Scene.js";
 import ControlsGameObject from "./Controls-GameObject.js";
 import PressStartGameObject from "./PressToStartGameObject.js";
 import StartSceneTitleGameObject from "./StartSceneTitle-GameObject.js";
@@ -17,7 +20,6 @@ import VelocityLensX from "./VelocityLensX.js";
 import VelocityLensY from "./VelocityLensY.js";
 import PointerGameObject from "./PointerGameObject.js";
 import ComponentListGameObject from "./ComponentListGameObject.js";
-import Rectangle from "../Engine/Rectangle.js";
 import ColliderLensGameObject from "./ColliderLens-GameObject.js";
 import LayerLensGameObject from "./LayerLens-GameObject.js";
 import ReturnDefaultSettings from "./ReturnDefaultSettings.js";
@@ -35,57 +37,110 @@ import PressForControlsGameObject from "./PressForControls-GameObject.js";
 import VelocityLensZ from "./VelocityLensZ.js";
 
 class ControllerUpdateComponent extends Component {
+
+  /**
+  * Function: constructor()
+  * Description: This is the constructor for ControllerUpdateComponent.js.
+  * @param parent: parent
+  */
   constructor(parent) {
     super(parent);
   }
 
+  /**
+  * Function: update()
+  * Description: This is the update function for ControllerUpdateComponent.js which is called every tick, and
+  * handles all the games inputs, lenses, and many other features within this function.
+  */
   update() {
-    // If the player is on the start scene (currentSceneIndex of 0), and they press the "Enter" key, they should be sent to the play scene (currentSceneIndex of 1).
+
+    ////////// Utility //////////
+
+    //Canvas Dimensions
+    const canvas = document.querySelector("canvas");
+
+    ////////// Scene Management //////////
+
+    // Main Menu to Play Scene
     if (Game.currentSceneIndex == 0 && Input.keys["Enter"] == true) {
+      //if the player is on the start scene (currentSceneIndex of 0), and they press the "Enter" key, 
+      //they should be sent to the play scene (currentSceneIndex of 1).
       Game.changeScene(1);
     }
 
-    // If the player is on the end scene (currentSceneIndex of 2), and they press the "Enter" key, they should be sent to the play scene (currentSceneIndex of 1).
+    // End Scene to Play Scene
     if (Game.currentSceneIndex == 2 && Input.keys["Enter"] == true) {
+      //if the player is on the end scene (currentSceneIndex of 2), and they press the "Enter" key, 
+      //they should be sent to the play scene (currentSceneIndex of 1).
       Game.changeScene(1);
       Game.userScore = 0;
       Game.aiScore = 0;
     }
-    // If the player is on the end scene (currentSceneIndex of 2), and they press the "Escape" key, they should be sent to the play scene (currentSceneIndex of 0).
+
+    // End Scene to Main Menu
     else if (Game.currentSceneIndex == 2 && Input.keys["Escape"] == true) {
+      //if the player is on the end scene (currentSceneIndex of 2), and they press the "Escape" key, 
+      //they should be sent to the play scene (currentSceneIndex of 0).
       Game.changeScene(0);
       Game.userScore = 0;
       Game.aiScore = 0;
     }
 
-        //Cheats
-        if (Input.keys["["] == true) {
-          Game.userScore++;
-        }
-        if (Input.keys["]"] == true) {
-          Game.aiScore++;
-        }
+    ////////// Cheats //////////
 
-        //Pause
-        if (Input.frameKeysDown["p"] == true || Input.frameKeysDown["P"] == true) {
-          if(LensesToggle.pause == false)
-          {
-            LensesToggle.pause = true;
-            Time.secondsBetweenFrame = 0;
-          }
-          else
-          {
-            LensesToggle.pause = false;
-            Time.secondsBetweenFrame = .01;
-          }
+    // Give user points
+    if (Input.keys["["] == true) {
+      Game.userScore++;
+    }
+
+    // Give bot points
+    if (Input.keys["]"] == true) {
+      Game.aiScore++;
+    }
+
+    ////////// Pause //////////
+
+    // Pause
+    if (Input.frameKeysDown["p"] == true || Input.frameKeysDown["P"] == true) {
+      if (LensesToggle.pause == false) {
+        LensesToggle.pause = true;
+        Time.secondsBetweenFrame = 0;
+
+        if (Game.currentSceneIndex == 1) {
+
+          //pause lens overlay
+          Game.scene().gameObjects.push(new ControlsGameObject(canvas.width - 300, 30, "        Lenses"));
+          Game.scene().gameObjects.push(new ControlsGameObject(canvas.width - 300, 60, "1 : Scene Lens"));
+          Game.scene().gameObjects.push(new ControlsGameObject(canvas.width - 300, 80, "2 : Time Lens"));
+          Game.scene().gameObjects.push(new ControlsGameObject(canvas.width - 300, 100, "3 : Input Lens"));
+          Game.scene().gameObjects.push(new ControlsGameObject(canvas.width - 300, 120, "4 : Velocity Lens"));
+          Game.scene().gameObjects.push(new ControlsGameObject(canvas.width - 300, 140, "5 : Components Lens"));
+          Game.scene().gameObjects.push(new ControlsGameObject(canvas.width - 300, 160, "6 : World Space Lens"));
+          Game.scene().gameObjects.push(new ControlsGameObject(canvas.width - 300, 180, "7 : Object Space Lens"));
+          Game.scene().gameObjects.push(new ControlsGameObject(canvas.width - 300, 200, "8 : Camera Space Lens"));
+          Game.scene().gameObjects.push(new ControlsGameObject(canvas.width - 300, 220, "9 : Screen Space Lens"));
+          Game.scene().gameObjects.push(new ControlsGameObject(canvas.width - 300, 240, "0 : Colliders Lens"));
+          Game.scene().gameObjects.push(new ControlsGameObject(canvas.width - 300, 260, "- : Layers Lens"));
+          Game.scene().gameObjects.push(new ControlsGameObject(canvas.width - 300, 280, "p : Pause"));
         }
+      }
 
-    const canvas = document.querySelector("canvas"); //For canvas dimensions
+      else {
+        LensesToggle.pause = false;
+        let controls = Game.FindByType("ControlsGameObject");
+        for (let i = 0; i < controls.length; i++) {
+          controls[i].markForDelete = true;
+        }
+        Time.secondsBetweenFrame = .01;
+      }
+    }
 
-    // If the player is on the start scene (currentSceneIndex of 0), and they press the "Enter" key, they should be sent to the play scene (currentSceneIndex of 1).
+    ////////// Controls Menu //////////
+
     if (Game.currentSceneIndex == 0 && Input.frameKeysDown["f"] == true || Input.frameKeysDown["F"] == true) {
       if (LensesToggle.controlsMenuToggle == false) {
-        //Remove Main Menu
+
+        //remove main menu gameObjects
         LensesToggle.controlsMenuToggle = true;
         let startSceneTitle = Game.FindByType("StartSceneTitleGameObject")[0];
         startSceneTitle.markForDelete = true;
@@ -94,25 +149,23 @@ class ControllerUpdateComponent extends Component {
         let pressForControls = Game.FindByType("PressForControlsGameObject")[0];
         pressForControls.markForDelete = true;
 
-        //Add Controls
+        //add controls
         Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 3 + 125, canvas.height / 10, "Controls"));
         Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 3 - 150, canvas.height / 5, "Game"));
         Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 3 + 600, canvas.height / 5, "Lenses"));
         Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 3 - 160, canvas.height / 5 + 250, "Cheats"));
         Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 2 - 150, canvas.height - canvas.height / 20, "Press F to go back"));
 
-
-        //Game
+        //add game controls
         Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 100, canvas.height / 5 + 100, "↑ or W: Move Up"));
         Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 100, canvas.height / 5 + 150, "↓ or D : Move Down"));
 
-        //Cheats
+        //add cheats controls
         Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 100, canvas.height / 5 + 350, "[ : Give Player Points"));
         Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 100, canvas.height / 5 + 400, "] : Give Bot Points"));
         Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 100, canvas.height / 5 + 450, "P : Pause"));
 
-
-        //Lenses
+        //add lens controls
         Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 900, canvas.height / 5 + 100, "1 : Scene Lens"));
         Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 900, canvas.height / 5 + 150, "2 : Time Lens"));
         Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 900, canvas.height / 5 + 200, "3 : Input Lens"));
@@ -124,30 +177,26 @@ class ControllerUpdateComponent extends Component {
         Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 900, canvas.height / 5 + 500, "9 : Screen Space Lens"));
         Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 900, canvas.height / 5 + 550, "0 : Colliders Lens"));
         Game.scene().gameObjects.push(new ControlsGameObject(canvas.width / 8 + 900, canvas.height / 5 + 600, "- : Layers Lens"));
-        
-
-
-
-
-
       }
       else {
-        //Remove Controls
+        //remove controls gameObjects
         LensesToggle.controlsMenuToggle = false;
         let controls = Game.FindByType("ControlsGameObject");
         for (let i = 0; i < controls.length; i++) {
           controls[i].markForDelete = true;
         }
 
-        //Add Main Menu Back
+        //add main menu gameObjects
         Game.scene().gameObjects.push(new PressForControlsGameObject(canvas.width / 2 - (canvas.width / 14), canvas.height / 2 + (canvas.height / 6)));
         Game.scene().gameObjects.push(new PressStartGameObject(canvas.width / 2 - (canvas.width / 9), canvas.height / 2 + (canvas.height / 11)));
         Game.scene().gameObjects.push(new StartSceneTitleGameObject(canvas.width / 2 - (canvas.width / 3), canvas.height / 2 - (canvas.height / 20)));
       }
     }
 
-    //LENSES
-    //Scene Lens
+    ////////// Lenses //////////
+    //adds lenses to scene
+
+    // Add Scene Lens
     if (Input.frameKeysDown["1"] == true) {
       if (LensesToggle.sceneLensToggle == false) {
         LensesToggle.sceneLensToggle = true;
@@ -161,7 +210,7 @@ class ControllerUpdateComponent extends Component {
       }
     }
 
-    //Time Lens
+    // Add Time Lens
     if (Input.frameKeysDown["2"] == true) {
       if (LensesToggle.timeLensToggle == false) {
         LensesToggle.timeLensToggle = true;
@@ -175,7 +224,7 @@ class ControllerUpdateComponent extends Component {
       }
     }
 
-    //Input Lens
+    // Add Input Lens
     if (Input.frameKeysDown["3"] == true) {
       if (LensesToggle.inputLensToggle == false) {
         LensesToggle.inputLensToggle = true;
@@ -189,7 +238,7 @@ class ControllerUpdateComponent extends Component {
       }
     }
 
-    // Velocities Lens
+    // Add Velocities Lens
     if (Input.frameKeysDown["4"] == true) {
       if (LensesToggle.velocityLensToggle == false) {
         LensesToggle.velocityLensToggle = true;
@@ -202,25 +251,25 @@ class ControllerUpdateComponent extends Component {
         Game.scene().gameObjects.push(new VelocityLensX(ball.x, ball.y, xWidth, 10));
         Game.scene().gameObjects.push(new VelocityLensY(ball.x, ball.y, 10, yHieght));
 
-        for(let i = 3; i < 10; i++){
+        for (let i = 3; i < 10; i++) {
           Game.scene().gameObjects.push(new VelocityLensZ(ball.x, ball.y, 7.5, i / 10));
         }
-      } 
+      }
       else if (LensesToggle.velocityLensToggle == true) {
         LensesToggle.velocityLensToggle = false;
         let velLensX = Game.FindByType("VelocityLensX")[0];
         let velLensY = Game.FindByType("VelocityLensY")[0];
-        for(let i = 0; i < 7; i++){
+        for (let i = 0; i < 7; i++) {
           let velLensZ = Game.FindByType("VelocityLensZ")[i];
           velLensZ.markForDelete = true;
         }
-        
+
         velLensX.markForDelete = true;
         velLensY.markForDelete = true;
       }
     }
 
-    // Components Lens
+    // Add Components Lens
     if (Input.frameKeysDown["5"] == true) {
       if (LensesToggle.componentLensToggle == false) {
         LensesToggle.componentLensToggle = true;
@@ -299,7 +348,7 @@ class ControllerUpdateComponent extends Component {
       }
     }
 
-    //Collider Lens
+    // Add Collider Lens
     if (Input.frameKeysDown["0"] == true) {
       if (LensesToggle.colliderLensToggle == false) {
         LensesToggle.colliderLensToggle = true;
@@ -311,7 +360,7 @@ class ControllerUpdateComponent extends Component {
         );
         Game.scene().gameObjects.push(new ScoreColliderGameObject());
       }
-      //If the collider lens is already on, return the color settings back to default then delete the lens
+      //if the collider lens is already on, return the color settings back to default then delete the lens
       else if (LensesToggle.colliderLensToggle == true) {
         LensesToggle.colliderLensToggle = false;
         let thisColliderLens = Game.FindByType("ColliderLensGameObject")[0];
@@ -324,7 +373,7 @@ class ControllerUpdateComponent extends Component {
       }
     }
 
-    //Layer Lens
+    // Add Layer Lens
     if (Input.frameKeysDown["-"] == true) {
       if (LensesToggle.layerLensToggle == false) {
         LensesToggle.layerLensToggle = true;
@@ -341,10 +390,10 @@ class ControllerUpdateComponent extends Component {
       }
     }
 
-    //World Space
+    // Add World Space Lens
     if (Input.frameKeysDown["6"] == true) {
       if (LensesToggle.worldSpaceToggle == false) {
-        //Turn off other lenses
+        //turn off other lenses
         if (LensesToggle.objectSpaceToggle == true) {
           LensesToggle.objectSpaceToggle = false;
           let gridOverlay = Game.FindByType("GridOverlayGameObject")[0];
@@ -368,6 +417,7 @@ class ControllerUpdateComponent extends Component {
           }
         }
 
+        //redraw camera space
         if (LensesToggle.cameraSpaceToggle == true) {
           LensesToggle.cameraSpaceToggle = false;
           let gridOverlay = Game.FindByType("GridOverlayGameObject")[0];
@@ -391,6 +441,7 @@ class ControllerUpdateComponent extends Component {
           }
         }
 
+        //redraw screen space
         if (LensesToggle.screenSpaceToggle == true) {
           LensesToggle.screenSpaceToggle = false;
           let gridOverlay = Game.FindByType("GridOverlayGameObject")[0];
@@ -414,7 +465,7 @@ class ControllerUpdateComponent extends Component {
           }
         }
 
-        //Add lens
+        //add lens
         LensesToggle.worldSpaceToggle = true;
         Game.scene().gameObjects.push(new GridOverlayGameObject());
         Game.scene().gameObjects.push(
@@ -450,10 +501,10 @@ class ControllerUpdateComponent extends Component {
       }
     }
 
-    //Object Space
+    // Add Object Space Lens
     if (Input.frameKeysDown["7"] == true) {
       if (LensesToggle.objectSpaceToggle == false) {
-        //Turn off other lenses
+        //turn off other lenses
         if (LensesToggle.worldSpaceToggle == true) {
           LensesToggle.worldSpaceToggle = false;
           let gridOverlay = Game.FindByType("GridOverlayGameObject")[0];
@@ -523,7 +574,7 @@ class ControllerUpdateComponent extends Component {
           }
         }
 
-        //Add new lens
+        //add new lens
         LensesToggle.objectSpaceToggle = true;
         Game.scene().gameObjects.push(new GridOverlayGameObject());
         let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
@@ -533,7 +584,7 @@ class ControllerUpdateComponent extends Component {
 
         if (ball) {
           Game.scene().gameObjects.push(
-            new BallCoordinateObjectSpaceGameObject(ball, 15, -15) // Adjust offsets here
+            new BallCoordinateObjectSpaceGameObject(ball, 15, -15) //adjust offsets here
           );
         }
       } else if (LensesToggle.objectSpaceToggle == true) {
@@ -560,10 +611,10 @@ class ControllerUpdateComponent extends Component {
       }
     }
 
-    //Camera Space
+    // Add Camera Space Lens
     if (Input.frameKeysDown["8"] == true) {
       if (LensesToggle.cameraSpaceToggle == false) {
-        //Turn off other lenses
+        //turn off other lenses
         if (LensesToggle.worldSpaceToggle == true) {
           LensesToggle.worldSpaceToggle = false;
           let gridOverlay = Game.FindByType("GridOverlayGameObject")[0];
@@ -633,7 +684,7 @@ class ControllerUpdateComponent extends Component {
           }
         }
 
-        //Add new lens
+        //add new lens
         LensesToggle.cameraSpaceToggle = true;
         Game.scene().gameObjects.push(new GridOverlayGameObject());
         let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
@@ -650,7 +701,7 @@ class ControllerUpdateComponent extends Component {
               ball,
               canvas.width,
               canvas.height
-            ) // Adjust offsets here
+            ) //adjust offsets here
           );
         }
       } else if (LensesToggle.cameraSpaceToggle == true) {
@@ -677,10 +728,10 @@ class ControllerUpdateComponent extends Component {
       }
     }
 
-    //Screen Space
+    // Add Screen Space Lens
     if (Input.frameKeysDown["9"] == true) {
       if (LensesToggle.screenSpaceToggle == false) {
-        //Turn off other lenses
+        //turn off other lenses
         if (LensesToggle.worldSpaceToggle == true) {
           LensesToggle.worldSpaceToggle = false;
           let gridOverlay = Game.FindByType("GridOverlayGameObject")[0];
@@ -750,7 +801,7 @@ class ControllerUpdateComponent extends Component {
           }
         }
 
-        //Add new lens
+        //add new lens
         LensesToggle.screenSpaceToggle = true;
         Game.scene().gameObjects.push(new GridOverlayGameObject());
         let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
@@ -760,7 +811,7 @@ class ControllerUpdateComponent extends Component {
 
         if (ball) {
           Game.scene().gameObjects.push(
-            new BallCoordinatesScreenSpaceGameObject(ball, 15, -15) // Adjust offsets here
+            new BallCoordinatesScreenSpaceGameObject(ball, 15, -15) //adjust offsets here
           );
         }
       } else if (LensesToggle.screenSpaceToggle == true) {

@@ -1,5 +1,7 @@
-// File: StartScene.js
-// Description: This file creates all the initial game objects for the main menu scene of the pong game
+/**
+ * File: StartScene.js
+ * Description: This file creates all the initial game objects for the main menu scene.
+ */
 
 // Imports
 import Scene from "../Engine/Scene.js";
@@ -25,20 +27,33 @@ import BallCoordinatesScreenSpaceGameObject from "./BallCoordinatesScreenSpaceGa
 import OriginCoordinatesScreenSpaceGameObject from "./OriginCoordinatesScreenSpaceGameObject.js";
 
 class StartScene extends Scene {
-  // Function: constructor()
-  // Description: This is the constructor for StartScene.js
+
+  /**
+   * Function: constructor()
+   * Description: This is the constructor for StartScene.js.
+   */
   constructor() {
     super("Start Scene");
   }
 
-  // Function: start()
-  // Description: This function handles all actions that will start at the very beggining of the main menu scene
-  // such as game object creation
+  /**
+  * Function: start()
+  * Description: This function handles all actions that will start at the beginning of the main menu scene
+  * such as game object creation.
+  */
   start() {
-    //Canvas size
+
+    ////////// Utility //////////
+
+    // Canvas Dimensions
     const canvas = document.querySelector("canvas");
 
-    //Background
+    // Add Game Controller
+    this.gameObjects.push(new ControllerGameObject());
+
+    ////////// Background //////////
+
+    // Add Background Dots
     for (var i = 0; i < 80; i++) {
       const color = `hsl(${Math.random() * 360}, 70%, 100%, 30%)`;
       this.gameObjects.push(
@@ -62,35 +77,42 @@ class StartScene extends Scene {
       );
     }
 
-    //Title
+    ////////// Text //////////
+
+    // Add Title
     this.gameObjects.push(new StartSceneTitleGameObject(canvas.width / 2 - (canvas.width / 3), canvas.height / 2 - (canvas.height / 20)));
 
-    //Press ENTER To Start
+    // Add Press ENTER To Start
     this.gameObjects.push(new PressStartGameObject(canvas.width / 2 - (canvas.width / 9), canvas.height / 2 + (canvas.height / 11)));
 
-    //Press F For Controls
+    // Add Press F For Controls
     this.gameObjects.push(new PressForControlsGameObject(canvas.width / 2 - (canvas.width / 14), canvas.height / 2 + (canvas.height / 6)));
 
+    ////////// Lenses //////////
+    //redraws active lenses
 
-    //Controller
-    this.gameObjects.push(new ControllerGameObject());
-
-    //Lenses
+    // Redraw Scene Lens
     if (LensesToggle.sceneLensToggle == true) {
       this.gameObjects.push(
         new SceneLensGameObject(canvas.width / 25, (canvas.height * 9) / 10)
       );
     }
+
+    // Redraw Time Lens
     if (LensesToggle.timeLensToggle == true) {
       this.gameObjects.push(
         new TimeLensGameObject(canvas.width / 25, (canvas.height * 9) / 10)
       );
     }
+
+    // Redraw Input Lens
     if (LensesToggle.inputLensToggle == true) {
       this.gameObjects.push(
         new InputLensGameObject(canvas.width / 25, (canvas.height * 9) / 10)
       );
     }
+
+    // Redraw Velocity Lens
     if (LensesToggle.velocityLensToggle == true) {
       let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
       let xVel = Game.FindByType("BallGameObject")[0].getComponent(
@@ -107,6 +129,8 @@ class StartScene extends Scene {
         new VelocityLensY(ball.x, ball.y, 10, 100 * (Math.abs(yVel) / 410))
       );
     }
+
+    // Redraw Components Lens
     if (LensesToggle.componentLensToggle == true) {
       LensesToggle.componentLensToggle = true;
       let numGameObjects = Game.scene().gameObjects.length;
@@ -171,6 +195,7 @@ class StartScene extends Scene {
       }
     }
 
+    // Redraw World Space Lens
     if (LensesToggle.worldSpaceToggle == true) {
       Game.scene().gameObjects.push(new GridOverlayGameObject());
       Game.scene().gameObjects.push(
@@ -179,10 +204,12 @@ class StartScene extends Scene {
       let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
       if (ball) {
         Game.scene().gameObjects.push(
-          new BallCoordinatesDisplayGameObject(ball, 15, -15) // Adjust offsets here
+          new BallCoordinatesDisplayGameObject(ball, 15, -15) //adjust offsets here
         );
       }
     }
+
+    // Redraw Object Space Lens
     if (LensesToggle.objectSpaceToggle == true) {
       Game.scene().gameObjects.push(new GridOverlayGameObject());
       let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
@@ -192,10 +219,12 @@ class StartScene extends Scene {
 
       if (ball) {
         Game.scene().gameObjects.push(
-          new BallCoordinateObjectSpaceGameObject(ball, 15, -15) // Adjust offsets here
+          new BallCoordinateObjectSpaceGameObject(ball, 15, -15) //adjust offsets here
         );
       }
     }
+
+    // Redraw Camera Space Lens
     if (LensesToggle.cameraSpaceToggle == true) {
       Game.scene().gameObjects.push(new GridOverlayGameObject());
       let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
@@ -209,11 +238,12 @@ class StartScene extends Scene {
             ball,
             canvas.width,
             canvas.height
-          ) // Adjust offsets here
+          ) //adjust offsets here
         );
       }
     }
 
+    // Redraw Screen Space Lens
     if (LensesToggle.screenSpaceToggle == true) {
       Game.scene().gameObjects.push(new GridOverlayGameObject());
       let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
@@ -223,7 +253,7 @@ class StartScene extends Scene {
 
       if (ball) {
         Game.scene().gameObjects.push(
-          new BallCoordinatesScreenSpaceGameObject(ball, 15, -15) // Adjust offsets here
+          new BallCoordinatesScreenSpaceGameObject(ball, 15, -15) //adjust offsets here
         );
       }
     }

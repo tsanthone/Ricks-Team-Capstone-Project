@@ -1,5 +1,10 @@
-// The play scene for the PONG game. This scene is where the actual gameplay will take place as well as progress to the end game screen.
+/**
+ * File: PlayScene.js
+ * Description: This file creates all the initial game objects for the play scene of the pong game which is
+ * the scene the game of pong is played in.
+ */
 
+// Imports
 import Scene from "../Engine/Scene.js";
 import MidFieldBarGameObject from "./MidFieldBarGameObject.js";
 import BallGameObject from "./BallGameObject.js";
@@ -31,20 +36,41 @@ import GridOverlayGameObject from "./GridOverlayGameObject.js";
 import VelocityLensZ from "./VelocityLensZ.js";
 
 class PlayScene extends Scene {
+
+  /**
+  * Function: constructor()
+  * Description: This is the constructor for PlayScene.js.
+  */
   constructor() {
     super("Play Scene");
   }
 
+  /**
+  * Function: start()
+  * Description: This function handles all actions that will start at the beginning of the play scene
+  * such as game object creation.
+  */
   start() {
+
+    ////////// Utility //////////
+
+    // Canvas Dimensions
+    const canvas = document.querySelector("canvas");
+
+    // Add Game Controller
+    this.gameObjects.push(new ControllerGameObject());
+
+    ////////// Game //////////
+
     // Add Mid-Field Bar
     let totalBars = 12;
     let midBarY = 20;
     for (let i = 0; i < totalBars; i++) {
       this.gameObjects.push(new MidFieldBarGameObject(midBarY));
-      midBarY += 80; // Adds 2X the height of a mid field bar dash to the Y so that the next one is spread down.
+      midBarY += 80; //adds 2X the height of a mid field bar dash to the Y so that the next one is spread down.
     }
 
-    // Add PONG Ball
+    // Add Pong Ball
     this.gameObjects.push(
       new BallGameObject(Constants.maxX / 2, Constants.maxY / 2)
     );
@@ -60,38 +86,43 @@ class PlayScene extends Scene {
       new AIPaddleGameObject(Constants.maxX - 80, Constants.maxY - 215)
     );
 
-    //////////////////    FOR TESTING     ////////////////////////
-    this.gameObjects.push(new ControllerGameObject());
+    ////////// Lenses //////////
+    //redraws active lenses
 
-    //Lenses
-    const canvas = document.querySelector("canvas");
-
-    //Lenses
+    // Redraw Scene Lens
     if (LensesToggle.sceneLensToggle == true) {
       this.gameObjects.push(
         new SceneLensGameObject(canvas.width / 25, (canvas.height * 9) / 10)
       );
     }
+
+    // Redraw Time Lens
     if (LensesToggle.timeLensToggle == true) {
       this.gameObjects.push(
         new TimeLensGameObject(canvas.width / 25, (canvas.height * 9) / 10)
       );
     }
+
+    // Redraw Input Lens
     if (LensesToggle.inputLensToggle == true) {
       this.gameObjects.push(
         new InputLensGameObject(canvas.width / 25, (canvas.height * 9) / 10)
       );
     }
+    // Redraw Collider Lens
     if (LensesToggle.colliderLensToggle == true) {
       this.gameObjects.push(
         new ColliderLensGameObject(canvas.width / 25, (canvas.height * 9) / 10)
       );
     }
+    // Redraw Layer Lens
     if (LensesToggle.layerLensToggle == true) {
       this.gameObjects.push(
         new LayerLensGameObject(canvas.width / 25, (canvas.height * 9) / 10)
       );
     }
+
+    // Redraw Velocity Lens
     if (LensesToggle.velocityLensToggle == true) {
       let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
       let xVel = Game.FindByType("BallGameObject")[0].getComponent(
@@ -107,10 +138,12 @@ class PlayScene extends Scene {
       Game.scene().gameObjects.push(
         new VelocityLensY(ball.x, ball.y, 10, 100 * (Math.abs(yVel) / 410))
       );
-      for(let i = 3; i < 10; i++){
+      for (let i = 3; i < 10; i++) {
         Game.scene().gameObjects.push(new VelocityLensZ(ball.x, ball.y, 7.5, i / 10));
       }
     }
+
+    // Redraw Components Lens
     if (LensesToggle.componentLensToggle == true) {
       LensesToggle.componentLensToggle = true;
       let numGameObjects = Game.scene().gameObjects.length;
@@ -175,6 +208,7 @@ class PlayScene extends Scene {
       }
     }
 
+    // Redraw World Space Lens
     if (LensesToggle.worldSpaceToggle == true) {
       Game.scene().gameObjects.push(new GridOverlayGameObject());
       Game.scene().gameObjects.push(
@@ -183,11 +217,12 @@ class PlayScene extends Scene {
       let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
       if (ball) {
         Game.scene().gameObjects.push(
-          new BallCoordinatesDisplayGameObject(ball, 15, -15) // Adjust offsets here
+          new BallCoordinatesDisplayGameObject(ball, 15, -15) //adjust offsets here
         );
       }
     }
 
+    // Redraw Object Space Lens
     if (LensesToggle.objectSpaceToggle == true) {
       Game.scene().gameObjects.push(new GridOverlayGameObject());
       let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
@@ -197,10 +232,12 @@ class PlayScene extends Scene {
 
       if (ball) {
         Game.scene().gameObjects.push(
-          new BallCoordinateObjectSpaceGameObject(ball, 15, -15) // Adjust offsets here
+          new BallCoordinateObjectSpaceGameObject(ball, 15, -15) //adjust offsets here
         );
       }
     }
+
+    // Redraw Camera Space Lens
     if (LensesToggle.cameraSpaceToggle == true) {
       Game.scene().gameObjects.push(new GridOverlayGameObject());
       let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
@@ -214,11 +251,12 @@ class PlayScene extends Scene {
             ball,
             canvas.width,
             canvas.height
-          ) // Adjust offsets here
+          ) //adjust offsets here
         );
       }
     }
 
+    // Redraw Screen Space Lens
     if (LensesToggle.screenSpaceToggle == true) {
       Game.scene().gameObjects.push(new GridOverlayGameObject());
       let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
@@ -228,7 +266,7 @@ class PlayScene extends Scene {
 
       if (ball) {
         Game.scene().gameObjects.push(
-          new BallCoordinatesScreenSpaceGameObject(ball, 15, -15) // Adjust offsets here
+          new BallCoordinatesScreenSpaceGameObject(ball, 15, -15) //adjust offsets here
         );
       }
     }

@@ -1,3 +1,8 @@
+/**
+ * File: Input.js
+ * Description: This is the file responsible for handeling the inputs of the game.
+ */
+
 class Input {
   static keys = []; // Keys that are currently down as reported by js events
   static keysDown = []; //Keys that went down this frame as reported by js events
@@ -21,7 +26,7 @@ class Input {
   static scrollWheel = 0; //The scroll wheel position as report by js events
   static frameScrollWheel = 0; //The scroll wheel change that will be reported next frame
 
-  ///FOR INPUT LENS
+  //for logging the most recent keys pressed for the input lens
   static keyHistory = ["", "", "", "", ""]
 
 

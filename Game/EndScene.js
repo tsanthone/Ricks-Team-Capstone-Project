@@ -1,16 +1,15 @@
-//Description: This is the StartScene.js file, this file contains the code for creation of the StartScene scene. To add a new scene you must
-//have it registered in the html file as a scene and add it into the scenes array.
+/**
+ * File: EndScene.js
+ * Description: This file creates all the initial game objects for the end scene.
+ */
 
+// Imports
 import Scene from "../Engine/Scene.js";
-import StartGameObject from "./StartSceneText-GameObject.js";
 import ControllerGameObject from "./ControllerGameObject.js";
-import PressStartGameObject from "./PressToStartGameObject.js";
 import DotGameObject from "./Dot-GameObject.js";
-import StartSceneTitleGameObject from "./StartSceneTitle-GameObject.js";
 import EndSceneResultGameObject from "./EndSceneResult-GameObject.js";
 import EndSceneTextGameObject from "./EndSceneText-GameObject.js";
 import Game from "../Engine/Game.js";
-import Constants from "./Constants.js";
 import LensesToggle from "./LensesToggle.js";
 import SceneLensGameObject from "./SceneLens-GameObject.js";
 import TimeLensGameObject from "./TimeLens-GameObject.js";
@@ -29,15 +28,34 @@ import PointerGameObject from "./PointerGameObject.js";
 import ComponentListGameObject from "./ComponentListGameObject.js";
 
 class EndScene extends Scene {
+
+  /**
+  * Function: constructor()
+  * Description: This is the constructor for EndScene.js.
+  */
   constructor() {
     super("End Scene");
   }
 
+  /**
+  * Function: start()
+  * Description: This function handles all actions that will start at the beginning of the end scene
+  * such as game object creation.
+  */
   start() {
+
+    ////////// Utility //////////
+
+    // Canvas Dimensions
     const canvas = document.querySelector("canvas");
 
-    //Result
-    if (Game.userScore >= 10) {
+    // Add Game Controller
+    this.gameObjects.push(new ControllerGameObject());
+
+    ////////// Text & Background //////////
+
+    // Add Game Result
+    if (Game.userScore >= 10) { //if player wins display win text and background
       for (var i = 0; i < 80; i++) {
         const color = `hsl(${Math.random() * 360}, 100%, 60%, 70%)`;
         this.gameObjects.push(
@@ -67,7 +85,7 @@ class EndScene extends Scene {
           "Winner!"
         )
       );
-    } else {
+    } else { //otherwise display lose text and background
       for (var i = 0; i < 80; i++) {
         const color = `hsl(${Math.random() * 360}, 10%, 20%, 70%)`;
         this.gameObjects.push(
@@ -106,35 +124,45 @@ class EndScene extends Scene {
       )
     );
 
-    //Controller
-    this.gameObjects.push(new ControllerGameObject());
+    ////////// Lenses //////////
+    //redraws active lenses
 
-    //Lenses
+    // Redraw Scene Lens
     if (LensesToggle.sceneLensToggle == true) {
       this.gameObjects.push(
         new SceneLensGameObject(canvas.width / 25, (canvas.height * 9) / 10)
       );
     }
+
+    // Redraw Time Lens
     if (LensesToggle.timeLensToggle == true) {
       this.gameObjects.push(
         new TimeLensGameObject(canvas.width / 25, (canvas.height * 9) / 10)
       );
     }
+
+    // Redraw Input Lens
     if (LensesToggle.inputLensToggle == true) {
       this.gameObjects.push(
         new InputLensGameObject(canvas.width / 25, (canvas.height * 9) / 10)
       );
     }
+
+    //Redraw Collider Lens
     if (LensesToggle.colliderLensToggle == true) {
       this.gameObjects.push(
         new ColliderLensGameObject(canvas.width / 25, (canvas.height * 9) / 10)
       );
     }
+
+    // Redraw Layer Lens
     if (LensesToggle.layerLensToggle == true) {
       this.gameObjects.push(
         new LayerLensGameObject(canvas.width / 25, (canvas.height * 9) / 10)
       );
     }
+
+    // Redraw Velocity Lens
     if (LensesToggle.velocityLensToggle == true) {
       let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
       let xVel = Game.FindByType("BallGameObject")[0].getComponent(
@@ -151,6 +179,8 @@ class EndScene extends Scene {
         new VelocityLensY(ball.x, ball.y, 10, 100 * (Math.abs(yVel) / 410))
       );
     }
+
+    // Redraw Components Lens
     if (LensesToggle.componentLensToggle == true) {
       LensesToggle.componentLensToggle = true;
       let numGameObjects = Game.scene().gameObjects.length;
@@ -215,6 +245,7 @@ class EndScene extends Scene {
       }
     }
 
+    // Redraw World Space Lens
     if (LensesToggle.worldSpaceToggle == true) {
       Game.scene().gameObjects.push(new GridOverlayGameObject());
       Game.scene().gameObjects.push(
@@ -223,10 +254,12 @@ class EndScene extends Scene {
       let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
       if (ball) {
         Game.scene().gameObjects.push(
-          new BallCoordinatesDisplayGameObject(ball, 15, -15) // Adjust offsets here
+          new BallCoordinatesDisplayGameObject(ball, 15, -15) //adjust offsets here
         );
       }
     }
+
+    // Redraw Object Space Lens
     if (LensesToggle.objectSpaceToggle == true) {
       Game.scene().gameObjects.push(new GridOverlayGameObject());
       let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
@@ -236,10 +269,12 @@ class EndScene extends Scene {
 
       if (ball) {
         Game.scene().gameObjects.push(
-          new BallCoordinateObjectSpaceGameObject(ball, 15, -15) // Adjust offsets here
+          new BallCoordinateObjectSpaceGameObject(ball, 15, -15) //adjust offsets here
         );
       }
     }
+
+    // Redraw Camera Space Lens
     if (LensesToggle.cameraSpaceToggle == true) {
       Game.scene().gameObjects.push(new GridOverlayGameObject());
       let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
@@ -253,11 +288,12 @@ class EndScene extends Scene {
             ball,
             canvas.width,
             canvas.height
-          ) // Adjust offsets here
+          ) //adjust offsets here
         );
       }
     }
 
+    // Redraw Screen Space Lens
     if (LensesToggle.screenSpaceToggle == true) {
       Game.scene().gameObjects.push(new GridOverlayGameObject());
       let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
@@ -267,7 +303,7 @@ class EndScene extends Scene {
 
       if (ball) {
         Game.scene().gameObjects.push(
-          new BallCoordinatesScreenSpaceGameObject(ball, 15, -15) // Adjust offsets here
+          new BallCoordinatesScreenSpaceGameObject(ball, 15, -15) //adjust offsets here
         );
       }
     }
