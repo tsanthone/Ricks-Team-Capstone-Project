@@ -32,7 +32,6 @@ import OriginCoordinatesCameraSpaceGameObject from "./OriginCoordinatesCameraSpa
 import BallCoordinateCameraSpaceGameObject from "./BallCoordinatesCameraSpaceGameObject.js";
 import BallCoordinatesScreenSpaceGameObject from "./BallCoordinatesScreenSpaceGameObject.js";
 import OriginCoordinatesScreenSpaceGameObject from "./OriginCoordinatesScreenSpaceGameObject.js";
-import GridOverlayGameObject from "./GridOverlayGameObject.js";
 import VelocityLensZ from "./VelocityLensZ.js";
 
 class PlayScene extends Scene {
@@ -210,7 +209,6 @@ class PlayScene extends Scene {
 
     // Redraw World Space Lens
     if (LensesToggle.worldSpaceToggle == true) {
-      Game.scene().gameObjects.push(new GridOverlayGameObject());
       Game.scene().gameObjects.push(
         new OriginCoordinatesDisplayGameObject(10, 20)
       );
@@ -224,7 +222,6 @@ class PlayScene extends Scene {
 
     // Redraw Object Space Lens
     if (LensesToggle.objectSpaceToggle == true) {
-      Game.scene().gameObjects.push(new GridOverlayGameObject());
       let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
       Game.scene().gameObjects.push(
         new OriginCoordinatesObjectSpaceGameObject(ball, 10, 20, 10)
@@ -239,7 +236,6 @@ class PlayScene extends Scene {
 
     // Redraw Camera Space Lens
     if (LensesToggle.cameraSpaceToggle == true) {
-      Game.scene().gameObjects.push(new GridOverlayGameObject());
       let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
       Game.scene().gameObjects.push(
         new OriginCoordinatesCameraSpaceGameObject(canvas.width, canvas.height)
@@ -258,7 +254,6 @@ class PlayScene extends Scene {
 
     // Redraw Screen Space Lens
     if (LensesToggle.screenSpaceToggle == true) {
-      Game.scene().gameObjects.push(new GridOverlayGameObject());
       let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
       Game.scene().gameObjects.push(
         new OriginCoordinatesScreenSpaceGameObject(10)

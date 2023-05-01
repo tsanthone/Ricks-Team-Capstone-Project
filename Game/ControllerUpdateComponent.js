@@ -23,7 +23,6 @@ import ComponentListGameObject from "./ComponentListGameObject.js";
 import ColliderLensGameObject from "./ColliderLens-GameObject.js";
 import LayerLensGameObject from "./LayerLens-GameObject.js";
 import ReturnDefaultSettings from "./ReturnDefaultSettings.js";
-import GridOverlayGameObject from "./GridOverlayGameObject.js";
 import OriginCoordinatesDisplayGameObject from "./OriginCoordinatesDisplayGameObject.js";
 import BallCoordinatesDisplayGameObject from "./BallCoordinatesDisplayGameObject.js";
 import OriginCoordinatesObjectSpaceGameObject from "./OriginCoordinatesObjectSpaceGameObject.js";
@@ -396,10 +395,6 @@ class ControllerUpdateComponent extends Component {
         //turn off other lenses
         if (LensesToggle.objectSpaceToggle == true) {
           LensesToggle.objectSpaceToggle = false;
-          let gridOverlay = Game.FindByType("GridOverlayGameObject")[0];
-          if (gridOverlay) {
-            gridOverlay.markForDelete = true;
-          }
 
           let originCoordinatesDisplay = Game.scene().gameObjects.find(
             (gameObject) =>
@@ -420,10 +415,6 @@ class ControllerUpdateComponent extends Component {
         //redraw camera space
         if (LensesToggle.cameraSpaceToggle == true) {
           LensesToggle.cameraSpaceToggle = false;
-          let gridOverlay = Game.FindByType("GridOverlayGameObject")[0];
-          if (gridOverlay) {
-            gridOverlay.markForDelete = true;
-          }
 
           let originCoordinatesDisplay = Game.scene().gameObjects.find(
             (gameObject) =>
@@ -444,10 +435,6 @@ class ControllerUpdateComponent extends Component {
         //redraw screen space
         if (LensesToggle.screenSpaceToggle == true) {
           LensesToggle.screenSpaceToggle = false;
-          let gridOverlay = Game.FindByType("GridOverlayGameObject")[0];
-          if (gridOverlay) {
-            gridOverlay.markForDelete = true;
-          }
 
           let originCoordinatesDisplay = Game.scene().gameObjects.find(
             (gameObject) =>
@@ -467,7 +454,6 @@ class ControllerUpdateComponent extends Component {
 
         //add lens
         LensesToggle.worldSpaceToggle = true;
-        Game.scene().gameObjects.push(new GridOverlayGameObject());
         Game.scene().gameObjects.push(
           new OriginCoordinatesDisplayGameObject(10, 20)
         );
@@ -479,10 +465,6 @@ class ControllerUpdateComponent extends Component {
         }
       } else if (LensesToggle.worldSpaceToggle == true) {
         LensesToggle.worldSpaceToggle = false;
-        let gridOverlay = Game.FindByType("GridOverlayGameObject")[0];
-        if (gridOverlay) {
-          gridOverlay.markForDelete = true;
-        }
 
         let originCoordinatesDisplay = Game.scene().gameObjects.find(
           (gameObject) =>
@@ -507,10 +489,6 @@ class ControllerUpdateComponent extends Component {
         //turn off other lenses
         if (LensesToggle.worldSpaceToggle == true) {
           LensesToggle.worldSpaceToggle = false;
-          let gridOverlay = Game.FindByType("GridOverlayGameObject")[0];
-          if (gridOverlay) {
-            gridOverlay.markForDelete = true;
-          }
 
           let originCoordinatesDisplay = Game.scene().gameObjects.find(
             (gameObject) =>
@@ -530,10 +508,6 @@ class ControllerUpdateComponent extends Component {
 
         if (LensesToggle.cameraSpaceToggle == true) {
           LensesToggle.cameraSpaceToggle = false;
-          let gridOverlay = Game.FindByType("GridOverlayGameObject")[0];
-          if (gridOverlay) {
-            gridOverlay.markForDelete = true;
-          }
 
           let originCoordinatesDisplay = Game.scene().gameObjects.find(
             (gameObject) =>
@@ -553,10 +527,6 @@ class ControllerUpdateComponent extends Component {
 
         if (LensesToggle.screenSpaceToggle == true) {
           LensesToggle.screenSpaceToggle = false;
-          let gridOverlay = Game.FindByType("GridOverlayGameObject")[0];
-          if (gridOverlay) {
-            gridOverlay.markForDelete = true;
-          }
 
           let originCoordinatesDisplay = Game.scene().gameObjects.find(
             (gameObject) =>
@@ -576,7 +546,6 @@ class ControllerUpdateComponent extends Component {
 
         //add new lens
         LensesToggle.objectSpaceToggle = true;
-        Game.scene().gameObjects.push(new GridOverlayGameObject());
         let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
         Game.scene().gameObjects.push(
           new OriginCoordinatesObjectSpaceGameObject(ball, canvas.height, 10)
@@ -589,10 +558,7 @@ class ControllerUpdateComponent extends Component {
         }
       } else if (LensesToggle.objectSpaceToggle == true) {
         LensesToggle.objectSpaceToggle = false;
-        let gridOverlay = Game.FindByType("GridOverlayGameObject")[0];
-        if (gridOverlay) {
-          gridOverlay.markForDelete = true;
-        }
+
 
         let originCoordinatesDisplay = Game.scene().gameObjects.find(
           (gameObject) =>
@@ -617,10 +583,6 @@ class ControllerUpdateComponent extends Component {
         //turn off other lenses
         if (LensesToggle.worldSpaceToggle == true) {
           LensesToggle.worldSpaceToggle = false;
-          let gridOverlay = Game.FindByType("GridOverlayGameObject")[0];
-          if (gridOverlay) {
-            gridOverlay.markForDelete = true;
-          }
 
           let originCoordinatesDisplay = Game.scene().gameObjects.find(
             (gameObject) =>
@@ -640,10 +602,6 @@ class ControllerUpdateComponent extends Component {
 
         if (LensesToggle.objectSpaceToggle == true) {
           LensesToggle.objectSpaceToggle = false;
-          let gridOverlay = Game.FindByType("GridOverlayGameObject")[0];
-          if (gridOverlay) {
-            gridOverlay.markForDelete = true;
-          }
 
           let originCoordinatesDisplay = Game.scene().gameObjects.find(
             (gameObject) =>
@@ -663,10 +621,6 @@ class ControllerUpdateComponent extends Component {
 
         if (LensesToggle.screenSpaceToggle == true) {
           LensesToggle.screenSpaceToggle = false;
-          let gridOverlay = Game.FindByType("GridOverlayGameObject")[0];
-          if (gridOverlay) {
-            gridOverlay.markForDelete = true;
-          }
 
           let originCoordinatesDisplay = Game.scene().gameObjects.find(
             (gameObject) =>
@@ -686,7 +640,6 @@ class ControllerUpdateComponent extends Component {
 
         //add new lens
         LensesToggle.cameraSpaceToggle = true;
-        Game.scene().gameObjects.push(new GridOverlayGameObject());
         let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
         Game.scene().gameObjects.push(
           new OriginCoordinatesCameraSpaceGameObject(
@@ -706,10 +659,6 @@ class ControllerUpdateComponent extends Component {
         }
       } else if (LensesToggle.cameraSpaceToggle == true) {
         LensesToggle.cameraSpaceToggle = false;
-        let gridOverlay = Game.FindByType("GridOverlayGameObject")[0];
-        if (gridOverlay) {
-          gridOverlay.markForDelete = true;
-        }
 
         let originCoordinatesDisplay = Game.scene().gameObjects.find(
           (gameObject) =>
@@ -734,10 +683,6 @@ class ControllerUpdateComponent extends Component {
         //turn off other lenses
         if (LensesToggle.worldSpaceToggle == true) {
           LensesToggle.worldSpaceToggle = false;
-          let gridOverlay = Game.FindByType("GridOverlayGameObject")[0];
-          if (gridOverlay) {
-            gridOverlay.markForDelete = true;
-          }
 
           let originCoordinatesDisplay = Game.scene().gameObjects.find(
             (gameObject) =>
@@ -757,10 +702,6 @@ class ControllerUpdateComponent extends Component {
 
         if (LensesToggle.cameraSpaceToggle == true) {
           LensesToggle.cameraSpaceToggle = false;
-          let gridOverlay = Game.FindByType("GridOverlayGameObject")[0];
-          if (gridOverlay) {
-            gridOverlay.markForDelete = true;
-          }
 
           let originCoordinatesDisplay = Game.scene().gameObjects.find(
             (gameObject) =>
@@ -780,10 +721,6 @@ class ControllerUpdateComponent extends Component {
 
         if (LensesToggle.objectSpaceToggle == true) {
           LensesToggle.cameraSpaceToggle = false;
-          let gridOverlay = Game.FindByType("GridOverlayGameObject")[0];
-          if (gridOverlay) {
-            gridOverlay.markForDelete = true;
-          }
 
           let originCoordinatesDisplay = Game.scene().gameObjects.find(
             (gameObject) =>
@@ -803,7 +740,6 @@ class ControllerUpdateComponent extends Component {
 
         //add new lens
         LensesToggle.screenSpaceToggle = true;
-        Game.scene().gameObjects.push(new GridOverlayGameObject());
         let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
         Game.scene().gameObjects.push(
           new OriginCoordinatesScreenSpaceGameObject(10)
@@ -816,10 +752,7 @@ class ControllerUpdateComponent extends Component {
         }
       } else if (LensesToggle.screenSpaceToggle == true) {
         LensesToggle.screenSpaceToggle = false;
-        let gridOverlay = Game.FindByType("GridOverlayGameObject")[0];
-        if (gridOverlay) {
-          gridOverlay.markForDelete = true;
-        }
+
 
         let originCoordinatesDisplay = Game.scene().gameObjects.find(
           (gameObject) =>
