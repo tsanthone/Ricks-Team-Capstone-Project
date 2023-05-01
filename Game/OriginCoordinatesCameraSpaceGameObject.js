@@ -22,6 +22,11 @@ class OriginCoordinatesCameraSpaceGameObject extends GameObject {
     ctx.fillStyle = "white";
     ctx.font = "14px Arial";
     ctx.fillText("(0, 0)", this.screenWidth / 2 + this.size + 2, this.screenHeight / 2 - this.size + 25);
+
+    // Display "Camera space" text in the top left corner
+    ctx.fillStyle = "white";
+    ctx.font = "14px Arial";
+    ctx.fillText("Camera space", 10, 20);
   }
 }
 

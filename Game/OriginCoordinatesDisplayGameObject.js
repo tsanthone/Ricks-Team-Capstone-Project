@@ -30,6 +30,11 @@ class OriginDisplayGameObject extends GameObject {
 
     // Restore context
     ctx.restore();
+
+    // Display "World space" text in the top left corner
+    ctx.fillStyle = "white";
+    ctx.font = "14px Arial";
+    ctx.fillText("World space", 10, 20);
   }
 }
 

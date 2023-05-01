@@ -32,6 +32,11 @@ class OriginCoordinatesObjectSpaceGameObject extends GameObject {
       centerX + this.size + 2,
       centerY - this.size - 5
     );
+
+    // Display "Object space" text in the top left corner
+    ctx.fillStyle = "white";
+    ctx.font = "14px Arial";
+    ctx.fillText("Object space", 10, 20);
   }
 }
 

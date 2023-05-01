@@ -20,6 +20,11 @@ class OriginCoordinatesScreenSpaceGameObject extends GameObject {
     ctx.fillStyle = "white";
     ctx.font = "14px Arial";
     ctx.fillText("(0, 0)", this.size + 2, this.size + 25);
+
+    // Display "Screen space" text in the top left corner
+    ctx.fillStyle = "white";
+    ctx.font = "14px Arial";
+    ctx.fillText("Screen space", 10, 20);
   }
 }
 
