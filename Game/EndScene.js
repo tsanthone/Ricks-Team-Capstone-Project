@@ -262,7 +262,7 @@ class EndScene extends Scene {
     if (LensesToggle.objectSpaceToggle == true) {
       let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
       Game.scene().gameObjects.push(
-        new OriginCoordinatesObjectSpaceGameObject(ball, 10, 20, 10)
+        new OriginCoordinatesObjectSpaceGameObject(ball, canvas.width, canvas.height, 10)
       );
 
       if (ball) {

@@ -548,7 +548,7 @@ class ControllerUpdateComponent extends Component {
         LensesToggle.objectSpaceToggle = true;
         let ball = Game.FindByType("BallGameObject")[0].getComponent("Circle");
         Game.scene().gameObjects.push(
-          new OriginCoordinatesObjectSpaceGameObject(ball, canvas.height, 10)
+          new OriginCoordinatesObjectSpaceGameObject(ball, canvas.width, canvas.height,  10)
         );
 
         if (ball) {
