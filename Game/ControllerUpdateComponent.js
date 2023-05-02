@@ -225,16 +225,13 @@ class ControllerUpdateComponent extends Component {
             }
         }
         //Collider Lens
-        if (Input.frameKeysDown["c"] == true) 
-        {
-            if (LensesToggle.colliderLensToggle == false) 
-            {
+        if (Input.frameKeysDown["c"] == true) {
+            if (LensesToggle.colliderLensToggle == false) {
                 LensesToggle.colliderLensToggle = true;
                 Game.scene().gameObjects.push(new ColliderLensGameObject(canvas.width / 25, canvas.height * 9 / 10));
             }
             //If the collider lens is already on, return the color settings back to default then delete the lens
-            else if (LensesToggle.colliderLensToggle == true) 
-            {
+            else if (LensesToggle.colliderLensToggle == true) {
                 LensesToggle.colliderLensToggle = false;
                 let thisColliderLens = Game.FindByType("ColliderLensGameObject")[0];
                 Game.scene().gameObjects.push(new ReturnDefaultSettings(canvas.width / 25, canvas.height * 9 / 10));

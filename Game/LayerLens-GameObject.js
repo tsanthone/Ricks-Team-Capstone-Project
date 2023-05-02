@@ -1,3 +1,10 @@
+/**
+ * File: LayerLensGameObject.js
+ * Description: This file is used as part of the layer lens implementation. This lens highlights objects 
+ * in different colors based on what type of object it is (foreground object, UI element, lens-specific element)
+ */
+
+//Imports
 import GameObject from "../Engine/GameObject.js"
 import Game from "../Engine/Game.js";
 import Text from "../Engine/Text.js"
@@ -10,6 +17,12 @@ import LensesToggle from "./LensesToggle.js";
 
 class LayerLensGameObject extends GameObject
 {
+  /**
+  * Function: constructor()
+  * Description: This is the constructor for LayerLensGameObject.js
+  * @param x: The x coordinate for the game object
+  * @param y: The y coordinate for the game object
+  */
   constructor(x,y)
   {
     super();
@@ -17,11 +30,18 @@ class LayerLensGameObject extends GameObject
     this.y = y;
     this.start();
   }
+  /**
+  * Function: start()
+  * Description: This is the start function for the layer lens, which 
+  * highlights objects in different colors.
+  */
   start()
   {
     const canvas = document.querySelector('canvas');
     let font = (canvas.height / 20) + "px sans";
     let totalBars = 12;
+
+    //These variables are used to obtain and change the color of the game's various objects.
     let thisScoreColor = Game.FindByType("ScoreGameObject")[0].getComponent("TextDraw");
     let thisBallColor = Game.FindByType("BallGameObject")[0].getComponent("CircleDraw");
     let thisUserPaddleColor = Game.FindByType("UserPaddleGameObject")[0].getComponent("RectangleDraw");
@@ -45,7 +65,7 @@ class LayerLensGameObject extends GameObject
     thisBallColor.fillStyle = "blue";
     thisBallColor.strokeStyle = "blue";
    
-    //Changes the color of the lens UI text for all active lenses
+    //Changes the color of the lens UI text for all active lenses (Scene, time, and/or input)
     if (LensesToggle.sceneLensToggle == true) {
       thisSceneLens = Game.FindByType("SceneLensGameObject")[0].getComponent("TextDraw");
       thisSceneLens.fillStyle = "red";
