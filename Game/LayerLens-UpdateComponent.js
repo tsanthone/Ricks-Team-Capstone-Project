@@ -24,8 +24,7 @@ class LayerLensUpdateComponent extends Component {
   */
   update() {
     let text = this.parent.getComponent("Text");
-    text.text = 
-    "Blue: Foreground Objects   Green: Standard UI Elements   Red: Lenses UI"; 
+    text.text = "Blue: Foreground Objects   Green: Standard UI Elements   Red: Lenses UI"; 
   }
 }
 
