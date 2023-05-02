@@ -32,6 +32,7 @@ class ReturnDefaultSettings extends GameObject
   start()
   { 
     let totalBars = 12;
+    
     //These variables are used to obtain and change the color of the game's various objects.
     let thisScoreColor = Game.FindByType("ScoreGameObject")[0].getComponent("TextDraw");
     let thisBallColor = Game.FindByType("BallGameObject")[0].getComponent("CircleDraw");
