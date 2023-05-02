@@ -26,7 +26,7 @@ class ColliderLensGameObject extends GameObject
   }
   /**
   * Function: start()
-  * Description: This is the start function for the collider lens ,which 
+  * Description: This is the start function for the collider lens, which 
   * changes the display colors of the different objects, making some of
   * them transparent.
   */
