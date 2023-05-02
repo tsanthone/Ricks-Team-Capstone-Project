@@ -245,6 +245,7 @@ class ControllerUpdateComponent extends Component {
                 LensesToggle.layerLensToggle = true;
                 Game.scene().gameObjects.push(new LayerLensGameObject(canvas.width / 25, canvas.height * 9 / 10));
             }
+            //If the layer lens is already on, return the color settings back to default then delete the lens
             else if (LensesToggle.layerLensToggle == true) {
                 LensesToggle.layerLensToggle = false;
                 let thisLayerLens = Game.FindByType("LayerLensGameObject")[0];
