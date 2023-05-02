@@ -17,12 +17,7 @@ class VelocityLensXUpdateComponent extends Component{
         let rect = this.parent.getComponent("Rectangle");
         let anchor;
 
-        if(xVel > 0){
-            anchor = ball.x + ball.r;
-        }
-        else if(xVel < 0){
-            anchor = ball.x - rect.w - ball.r;
-        }
+        anchor = ball.x + ball.r;
 
         if(rect.x != anchor || rect.y != ball.y - 5){
             rect.x = anchor;
