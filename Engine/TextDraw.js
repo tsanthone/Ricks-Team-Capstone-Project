@@ -1,3 +1,5 @@
+// This is the class responsible for drawing any text object in the game.
+
 import Component from "./Component.js";
 
 class TextDraw extends Component {

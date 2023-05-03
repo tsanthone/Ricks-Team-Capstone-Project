@@ -17,8 +17,10 @@ class VelocityLensXUpdateComponent extends Component{
         let rect = this.parent.getComponent("Rectangle");
         let anchor;
 
+        // Sets the anchor at whatever the balls x value is plus its r value.
         anchor = ball.x + ball.r;
 
+        // Check to make sure that the x velocity bar moves with the ball.
         if(rect.x != anchor || rect.y != ball.y - 5){
             rect.x = anchor;
             rect.y = ball.y - 5;

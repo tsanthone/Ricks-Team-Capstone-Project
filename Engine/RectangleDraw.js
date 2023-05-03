@@ -1,3 +1,5 @@
+// This is the file responsible for drawing any rectangle game objects in the game.
+
 import Component from "./Component.js";
 
 class RectangleDraw extends Component{

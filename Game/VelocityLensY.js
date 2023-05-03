@@ -1,5 +1,6 @@
 // Game object class for the Y velocity lens for the ball.
 
+// Imports
 import GameObject from "../Engine/GameObject.js";
 import Rectangle from "../Engine/Rectangle.js";
 import RectangleDraw from "../Engine/RectangleDraw.js";

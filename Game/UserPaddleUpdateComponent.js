@@ -1,5 +1,6 @@
 // Update Component for the User Paddle.
 
+// Imports
 import Component from "../Engine/Component.js";
 import Input from "../Engine/Input.js";
 import Time from "../Engine/Time.js";
@@ -26,11 +27,6 @@ class UserPaddleUpdateComponent extends Component{
         // Prevents the user paddle from leaving the screen.
         if(proposedY > 0 && proposedY < Constants.maxY - paddle.h){
             paddle.y = proposedY;
-        }
-
-        if(Input.getMouseButtonDown(0) == true)
-        {
-            console.log("CLICKed")
         }
     }
 }

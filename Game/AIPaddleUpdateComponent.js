@@ -1,5 +1,6 @@
 // Update Component for the AI Paddle.
 
+// Imports
 import Component from "../Engine/Component.js";
 import Time from "../Engine/Time.js";
 import Constants from "./Constants.js";
@@ -8,6 +9,7 @@ import Game from "../Engine/Game.js";
 class AIPaddleUpdateComponent extends Component{
     constructor(parent){
         super(parent);
+        // The paddles move at a static velocity of 300.
         this.vel = 300;
     }
 

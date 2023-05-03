@@ -14,9 +14,11 @@ class VelocityLensZUpdateComponent extends Component{
         let yVel = Game.FindByType("BallGameObject")[0].getComponent("BallUpdateComponent").yVel;
         let circle = this.parent.getComponent("Circle");
 
+        // Sets the anchors to be diagonally away from the ball depending on how far we want it to be.
         let anchorX = ball.x + ((100 * (xVel / 400))) * this.parent.dist;
         let anchorY = ball.y + ((100 * (yVel / 410))) * this.parent.dist;
 
+        // Check to make sure that the z velocity circles move with the ball.
         if(circle.x != anchorX || circle.y != anchorY){
             circle.x = anchorX;
             circle.y = anchorY;

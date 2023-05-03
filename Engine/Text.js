@@ -1,3 +1,5 @@
+// This is the class responsible for creating any text object in the game.
+
 import Component from "./Component.js";
 
 class Text extends Component{

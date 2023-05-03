@@ -1,5 +1,6 @@
 // Game object class for the screen border collider for the collider lens.
 
+// Imports
 import GameObject from "../Engine/GameObject.js";
 import Rectangle from "../Engine/Rectangle.js";
 import RectangleDraw from "../Engine/RectangleDraw.js";
