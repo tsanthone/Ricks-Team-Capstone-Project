@@ -37,6 +37,8 @@ import AIPaddleCoordinatesDisplay from "./AIPaddleCoordinatesDisplay.js";
 import UserPaddleCoordinatesDisplay from "./UserPaddleCoordinatesDisplay.js";
 import UserPaddleCoordinatesWorldSpace from "./UserPaddleCoordinatesWorldSpace.js";
 import AIPaddleCoordinatesWorldSpace from "./AIPaddleCoordinatesWorldSPace.js";
+import UserPaddleCoordinatesObjectSpace from "./UserPaddleCoordinatesObjectSpace.js";
+import AIPaddleCoordinatesObjectSpace from "./AIPaddleCoordinatesObjectSpace.js";
 
 
 class PlayScene extends Scene {
@@ -247,6 +249,15 @@ class PlayScene extends Scene {
           new BallCoordinateObjectSpaceGameObject(ball, 15, -15) //adjust offsets here
         );
       }
+
+      let userPaddle = Game.FindByType("UserPaddleGameObject")[0].getComponent("Rectangle");
+      let aiPaddle = Game.FindByType("AIPaddleGameObject")[0].getComponent("Rectangle");
+
+      const aiPaddleCoordinatesObjectSpace = new AIPaddleCoordinatesObjectSpace(aiPaddle, ball, canvas.height - 176);
+      const userPaddleCoordinatesObjectSpace = new UserPaddleCoordinatesObjectSpace(userPaddle, ball, canvas.height - 176);
+
+      Game.scene().gameObjects.push(aiPaddleCoordinatesObjectSpace);
+      Game.scene().gameObjects.push(userPaddleCoordinatesObjectSpace);
     }
 
     // Redraw Camera Space Lens

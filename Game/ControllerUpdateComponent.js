@@ -43,6 +43,9 @@ import AIPaddleCoordinatesDisplay from "./AIPaddleCoordinatesDisplay.js";
 import UserPaddleCoordinatesDisplay from "./UserPaddleCoordinatesDisplay.js";
 import AIPaddleCoordinatesWorldSpace from "./AIPaddleCoordinatesWorldSPace.js";
 import UserPaddleCoordinatesWorldSpace from "./UserPaddleCoordinatesWorldSpace.js";
+import AIPaddleCoordinatesObjectSpace from "./AIPaddleCoordinatesObjectSpace.js";
+import UserPaddleCoordinatesObjectSpace from "./UserPaddleCoordinatesObjectSpace.js";
+
 
 
 class ControllerUpdateComponent extends Component {
@@ -493,8 +496,8 @@ class ControllerUpdateComponent extends Component {
         let userPaddle = Game.FindByType("UserPaddleGameObject")[0].getComponent("Rectangle");
         let aiPaddle = Game.FindByType("AIPaddleGameObject")[0].getComponent("Rectangle");
 
-        const aiPaddleCoordinatesWorldSpace = new AIPaddleCoordinatesWorldSpace(aiPaddle, canvas.height - 176);
-        const userPaddleCoordinatesWorldSpace = new UserPaddleCoordinatesWorldSpace(userPaddle, canvas.height - 176);
+        const aiPaddleCoordinatesWorldSpace = new AIPaddleCoordinatesWorldSpace(aiPaddle, canvas.height);
+        const userPaddleCoordinatesWorldSpace = new UserPaddleCoordinatesWorldSpace(userPaddle, canvas.height);
         
        Game.scene().gameObjects.push(aiPaddleCoordinatesWorldSpace);
        Game.scene().gameObjects.push(userPaddleCoordinatesWorldSpace);
@@ -654,6 +657,16 @@ class ControllerUpdateComponent extends Component {
             new BallCoordinateObjectSpaceGameObject(ball, 15, -15) //adjust offsets here
           );
         }
+
+        let userPaddle = Game.FindByType("UserPaddleGameObject")[0].getComponent("Rectangle");
+        let aiPaddle = Game.FindByType("AIPaddleGameObject")[0].getComponent("Rectangle");
+
+        const aiPaddleCoordinatesObjectSpace = new AIPaddleCoordinatesObjectSpace(aiPaddle, ball, canvas.height - 176);
+        const userPaddleCoordinatesObjectSpace = new UserPaddleCoordinatesObjectSpace(userPaddle, ball, canvas.height);
+
+        Game.scene().gameObjects.push(aiPaddleCoordinatesObjectSpace);
+        Game.scene().gameObjects.push(userPaddleCoordinatesObjectSpace);
+        
       } else if (LensesToggle.objectSpaceToggle == true) {
         LensesToggle.objectSpaceToggle = false;
 
@@ -671,6 +684,22 @@ class ControllerUpdateComponent extends Component {
         )[0];
         if (ballCoordinatesDisplay) {
           ballCoordinatesDisplay.markForDelete = true;
+        }
+
+        let aiPaddleCoordinatesObjectSpace = Game.FindByType(
+          "AIPaddleCoordinatesObjectSpace"
+        )[0];
+        if (aiPaddleCoordinatesObjectSpace)
+        {
+          aiPaddleCoordinatesObjectSpace.markForDelete = true;
+        }
+
+        let userPaddleCoordinatesObjectSpace = Game.FindByType(
+          "UserPaddleCoordinatesObjectSpace"
+        )[0];
+        if (userPaddleCoordinatesObjectSpace)
+        {
+          userPaddleCoordinatesObjectSpace.markForDelete = true;
         }
       }
     }
