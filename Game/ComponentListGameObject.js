@@ -1,5 +1,7 @@
 // Game object class for the component list which displays the components at the pointer.
 
+
+// Imports
 import GameObject from "../Engine/GameObject.js";
 import Text from "../Engine/Text.js";
 import TextDraw from "../engine/TextDraw.js";

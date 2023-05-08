@@ -1,3 +1,5 @@
+// This is the class that is responsible for creating any scene in the game.
+
 class Scene{
     constructor(name){
         this.name = name;

@@ -1,5 +1,6 @@
 // Game object for the text displaying the scores (user and AI).
 
+// Imports
 import Game from "../Engine/Game.js";
 import GameObject from "../Engine/GameObject.js";
 import Text from "../Engine/Text.js";

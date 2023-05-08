@@ -17,8 +17,10 @@ class VelocityLensYUpdateComponent extends Component{
         let rect = this.parent.getComponent("Rectangle");
         let anchor;
 
+        // Sets the anchor at whatever the balls y value is minus its r value and the height of the y velocity bar.
         anchor = ball.y - rect.h - ball.r;
 
+        // Check to make sure that the y velocity bar moves with the ball.
         if(rect.y != anchor || rect.x != ball.x - 5){
             rect.y = anchor;
             rect.x = ball.x - 5;

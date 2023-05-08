@@ -1,5 +1,6 @@
 // Update Component for the PONG Ball game object.
 
+// Imports
 import Component from "../Engine/Component.js";
 import Time from "../Engine/Time.js";
 import Constants from "./Constants.js";
