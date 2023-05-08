@@ -1,0 +1,16 @@
+{
+  "name": "ricks-team-capstone-project",
+  "version": "1.0.0",
+  "description": "This application is going to be a learning tool used by our client to teach his students how the different aspects of a game are altered and interact with \r each other throughout the span of a game. To accomplish this, the game allows the user to view the game through different \"lenses\" that show some individual aspects of the game and its object.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.33.0"
+  }
+}
