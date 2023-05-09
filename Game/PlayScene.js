@@ -39,7 +39,12 @@ import UserPaddleCoordinatesWorldSpace from "./UserPaddleCoordinatesWorldSpace.j
 import AIPaddleCoordinatesWorldSpace from "./AIPaddleCoordinatesWorldSPace.js";
 import UserPaddleCoordinatesObjectSpace from "./UserPaddleCoordinatesObjectSpace.js";
 import AIPaddleCoordinatesObjectSpace from "./AIPaddleCoordinatesObjectSpace.js";
-
+import AIPaddleCoordinatesCameraSpace from "./AIPaddleCoordinatesCameraSpace.js";
+import UserPaddleCoordinatesCameraSpace from "./UserPaddleCoordinatesCameraSpace.js";
+import MouseCoordinatesDisplay from "./MouseCoordinatesDisplay.js";
+import MouseCoordinatesCameraSpace from "./MouseCoordinatesCameraSpace.js";
+import MouseCoordinatesObjectSpace from "./MouseCoordinatesObjectSpace.js";
+import MouseCoordinatesScreenSpace from "./MouseCoordinatesScreenSpace.js";
 
 class PlayScene extends Scene {
 
@@ -235,6 +240,9 @@ class PlayScene extends Scene {
      Game.scene().gameObjects.push(aiPaddleCoordinatesWorldSpace);
      Game.scene().gameObjects.push(userPaddleCoordinatesWorldSpace);
 
+     const mouseCoordinatesDisplay = new MouseCoordinatesDisplay(canvas.width, canvas.height);
+     Game.scene().gameObjects.push(mouseCoordinatesDisplay);
+
     }
 
     // Redraw Object Space Lens
@@ -258,6 +266,13 @@ class PlayScene extends Scene {
 
       Game.scene().gameObjects.push(aiPaddleCoordinatesObjectSpace);
       Game.scene().gameObjects.push(userPaddleCoordinatesObjectSpace);
+
+      const mouseCoordinatesObjectSpace = new MouseCoordinatesObjectSpace(
+        ball,
+        canvas.width,
+        canvas.height
+      );
+      Game.scene().gameObjects.push(mouseCoordinatesObjectSpace);
     }
 
     // Redraw Camera Space Lens
@@ -276,6 +291,18 @@ class PlayScene extends Scene {
           ) //adjust offsets here
         );
       }
+
+      let userPaddle = Game.FindByType("UserPaddleGameObject")[0].getComponent("Rectangle");
+      let aiPaddle = Game.FindByType("AIPaddleGameObject")[0].getComponent("Rectangle");
+
+      const aiPaddleCoordinatesCameraSpace = new AIPaddleCoordinatesCameraSpace(aiPaddle, canvas.width, canvas.height);
+      const userPaddleCoordinatesCameraSpace = new UserPaddleCoordinatesCameraSpace(userPaddle, canvas.width, canvas.height);
+
+      Game.scene().gameObjects.push(aiPaddleCoordinatesCameraSpace);
+      Game.scene().gameObjects.push(userPaddleCoordinatesCameraSpace);
+
+      const mouseCoordinatesCameraSpace = new MouseCoordinatesCameraSpace(canvas.width, canvas.height);
+      Game.scene().gameObjects.push(mouseCoordinatesCameraSpace);
     }
 
     // Redraw Screen Space Lens
@@ -299,6 +326,12 @@ class PlayScene extends Scene {
 
       Game.scene().gameObjects.push(aiPaddleCoordinatesDisplay);
       Game.scene().gameObjects.push(userPaddleCoordinatesDisplay);
+
+      const mouseCoordinatesScreenSpace = new MouseCoordinatesScreenSpace(
+        canvas.width,
+        canvas.height
+      );
+      Game.scene().gameObjects.push(mouseCoordinatesScreenSpace);
     }
   }
 }
