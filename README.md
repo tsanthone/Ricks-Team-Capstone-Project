@@ -17,3 +17,6 @@ Milestone 3 - Created the mechanism from which to turn lenses on and off, as wel
 Milestone 4 - Completion of the rest of the lenses. Those being the velocities, components, spaces, colliders, and layers.
               We have also implemented a pause feature in order to get a better look at the lenses while the game is playing.
               Finally we added a controls menu at the start scene so that the user can see all the controls.
+
+Milestone 5 - Fully completed every left, including testing and commenting all code. Also included are minor changes to the
+              looks and feel of the application.
